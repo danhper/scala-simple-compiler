@@ -1,2 +1,0 @@
-haskell-simple-compiler
-=======================

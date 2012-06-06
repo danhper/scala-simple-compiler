@@ -10,6 +10,14 @@ object Function {
     case _ => makeNum(f2(a.getDoubleVal, b.getDoubleVal))
   }
 
+  case object DefVar extends Fun {
+    def assign(v: Var, e: Exp) = {
+      val exprVal = e.eval
+      T.addVar(v, exprVal)
+      exprVal
+    }
+  }
+
   abstract class Binary extends Fun {
     def f(a: Num, b: Num): Num
     def f(exp1: Exp, exp2: Exp): Exp

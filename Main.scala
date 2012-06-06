@@ -17,17 +17,18 @@ object Main {
   }
 
   def prompt = {
-    var parser = new Pars
+    var parser = new Pars(new Lex)
     print(">> ")
     for (line <- io.Source.stdin.getLines) {
       try {
-        val exp = parser.parse(line) 
+        val exp = parser.parse(line)
         println(exp.eval)
       } catch {
           case e: ParseException => e.printError
           case e: ArithmeticException => println("division by 0")
           case e: BadTokenException => e.printError
           case e: EvalException => e.printError
+          case e: NumberFormatException => println("overflow")
           case e => e.printStackTrace
       } finally {
         print(">> ")

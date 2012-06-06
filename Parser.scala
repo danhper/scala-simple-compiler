@@ -1,27 +1,30 @@
 object Parser {
   import Expression._
   import Lexer._
+  import Statement._
 
   class ParseException(err: String) extends Exception {
     def printError = println("parse error : " + err)
   }
 
-  class Pars {
-    var lexer: Lex = null
+  class Pars(lexer: Lex) {
     var token: Token = Eof
     var eval: Boolean = false
 
     def advance = token = lexer.getToken
-    def eat(t: Token) = if (token == t) advance else error("error at token " + t)
-    def eatId: Id = if(token.isInstanceOf[Id]) {
-      val tmp = token.asInstanceOf[Id]
-      advance; tmp
-    } else error("missing id at token " + token) 
+    def eat(t: Token) = token match {
+      case t if token == t => advance
+      case _ => error("error at token " + t)
+    }
+    def eatId: Id = token match {
+      case id: Id => advance; id
+      case _ => error("missing id at token " + token)
+    }
 
     def error(s: String) = throw new ParseException(s)
-    
+
     def parse(s: String): Exp = {
-      lexer = new Lex(s)
+      lexer.init(s)
       advance
       T.lastInput = parseExpression
       token match {
@@ -29,7 +32,19 @@ object Parser {
         case n => throw new ParseException("wrong token " + token + " at end of line")
       }
     }
-    
+
+    def parseStatement: Stmt = token match {
+      case KeyWord(s) => s match {
+        case "fun" => parseFunctionDef
+        case _ => throw new ParseException("Wrong keyword " + s)
+      }
+      case _ => ExprStmt(parseExpression)
+    }
+
+    def parseFunctionDef: FuncDef = {
+      FuncDef("", List(), List())
+    }
+
     def parseExpression: Exp = {
       def parseRightExpression(exp: Exp): Exp = token match {
         case Op("+") => advance; parseRightExpression(exp + parseTerm)
@@ -66,23 +81,16 @@ object Parser {
       case Op("+") => advance; parseFactor
       case Op("-") => advance; -parseFactor
       case Id(s) => advance; token match {
-          case Op("=") => assignValue(s)
+          case Op("=") => advance; Var(s) := parseExpression
           case One('(') => callFunction(s)
           case _ => Var(s)
         }
       case KeyWord(s) => s match {
-        case "Fun" => error("test")
+        case "fun" => error("test")
       }
       case One('%') => advance; T.lastInput
       case One(')') => error("missing left bracket")
       case _ => error("missing operand at token " + token)
-    }
-
-    private def assignValue(s: String ) = {
-      advance
-      val exp = parseExpression
-      T.addVar(s, exp.eval)
-      Var(s)
     }
 
     private def callFunction(s: String) = {

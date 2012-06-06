@@ -8,14 +8,14 @@ object Lexer {
   case class KeyWord(s: String) extends Token
   case object Eof extends Token
 
-  val KeyWords = List("Fun")
+  val KeyWords = List("fun")
 
   class BadTokenException(s: String) extends Exception {
     def printError = println(s)
   }
 
-  class Lex(s: String) {
-    var line = s
+  class Lex {
+    var line: String = null
 
     def advance = if (!line.isEmpty) line = line.substring(1)
     def lookAhead: Option[Char] = line.headOption
@@ -46,7 +46,7 @@ object Lexer {
     }
 
     def getId(s: String): Token = lookAhead match {
-      case None => Id(s)
+      case None => if(KeyWords.contains(s)) KeyWord(s) else Id(s)
       case Some(c) => c match {
         case c if c.isLetter => advance; getId(s + c)
         case _ => if(KeyWords.contains(s)) KeyWord(s) else Id(s)
@@ -61,6 +61,10 @@ object Lexer {
         case c if c.toString.matches("[=+/*'^-]") => advance; Op(c.toString)
         case _ => advance; One(c)
       }
+    }
+    
+    def init(s: String) = {
+      line = s
     }
   }
 }

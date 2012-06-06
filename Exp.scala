@@ -48,6 +48,7 @@ object Expression {
   }
 
   case class Var(s: String) extends Exp {
+    def :=(other: Exp): Exp = makeBinaryApp(DefVar, this, other)
     def eval = T.table.get(this) match {
       case None => throw new EvalException("Variable " + this.s + " is missing.")
       case Some(n) => n
@@ -58,6 +59,10 @@ object Expression {
     def eval = fun match {
       case un: Unary => un.f(left.eval)
       case bin: Binary => bin.f(left.eval, right.get.eval)
+      case d @ DefVar => left match {
+        case v: Var => d.assign(v, right.get)
+        case _ => throw new EvalException("Wrong assignement")
+      }
     }
   }
 }

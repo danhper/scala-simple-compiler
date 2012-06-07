@@ -8,7 +8,7 @@ object Lexer {
   case class KeyWord(s: String) extends Token
   case object Eof extends Token
 
-  val KeyWords = List("fun")
+  val KeyWords = List("fun", "end")
 
   class BadTokenException(s: String) extends Exception {
     def printError = println(s)

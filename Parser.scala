@@ -14,11 +14,7 @@ object Parser {
     def advance = token = lexer.getToken
     def eat(t: Token) = token match {
       case t if token == t => advance
-      case _ => error("error at token " + t)
-    }
-    def eatId: Id = token match {
-      case id: Id => advance; id
-      case _ => error("missing id at token " + token)
+      case _ => error("error at token " + token + " expected " + t)
     }
 
     def error(s: String) = throw new ParseException(s)
@@ -29,20 +25,43 @@ object Parser {
       T.lastInput = parseExpression
       token match {
         case Eof => T.lastInput
-        case n => throw new ParseException("wrong token " + token + " at end of line")
+        case n => error("wrong token " + token + " at end of line")
       }
     }
 
     def parseStatement: Stmt = token match {
       case KeyWord(s) => s match {
-        case "fun" => parseFunctionDef
-        case _ => throw new ParseException("Wrong keyword " + s)
+        case "fun" => advance; parseFunctionDef
+        case _ => error("Wrong keyword " + s)
       }
       case _ => ExprStmt(parseExpression)
     }
 
     def parseFunctionDef: FuncDef = {
-      FuncDef("", List(), List())
+      val name = token match {
+       case Id(s) => s
+       case _ => error("missing function name" + token)
+      }
+      val varList = parseParameterList
+      val stmts = parseBlock
+      eat(KeyWord("end"))
+      FuncDef(name, varList, stmts)
+    }
+    
+    def parseBlock: CompStmt = {
+      eat(One(':'))
+      CompStmt(List())      
+    }
+
+    def parseParameterList: List[Var] = {
+      def parseList(li: List[Var]): List[Var] = token match {
+        case v: Var => advance; parseList(v::li)
+        case _ => li
+      }
+      eat(One('('))
+      val paramList = parseList(Nil)
+      eat(One(')'))
+      paramList
     }
 
     def parseExpression: Exp = {

@@ -29,6 +29,16 @@ object Parser {
       }
     }
 
+    def parseStatements: List[Stmt] = {
+      def parseAll(stmts: List[Stmt]) = token match {
+        case Eof => stmts
+        case _ => {
+          stmt = parseStatement
+          parseAll(stmt::stmts)
+      }
+      parseAll(List())
+    }
+
     def parseStatement: Stmt = token match {
       case KeyWord(s) => s match {
         case "fun" => advance; parseFunctionDef

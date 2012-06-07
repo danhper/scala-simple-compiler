@@ -1,16 +1,16 @@
-object Function {
+object Operator {
   import Expression._
 
-  abstract class Fun
+  abstract class Op
 
   def makeNum(n : Int) = IntNum(n) 
   def makeNum(n : Double) = DoubleNum(n)
   def makeCalc(a : Num, b : Num, f1 : (Int, Int) => Int, f2 : (Double, Double) => Double) = (a, b) match {
-    case (i: IntNum, j: IntNum) => makeNum(f1(i.getVal, j.getVal))
-    case _ => makeNum(f2(a.getDoubleVal, b.getDoubleVal))
+    case (i: IntNum, j: IntNum) => makeNum(f1(i getVal, j getVal))
+    case _ => makeNum(f2(a getDoubleVal, b getDoubleVal))
   }
 
-  case object DefVar extends Fun {
+  case object DefVar extends Op {
     def assign(v: Var, e: Exp) = {
       val exprVal = e.eval
       T.addVar(v, exprVal)
@@ -18,11 +18,11 @@ object Function {
     }
   }
 
-  abstract class Binary extends Fun {
+  abstract class Binary extends Op {
     def f(a: Num, b: Num): Num
     def f(exp1: Exp, exp2: Exp): Exp
   }
-  abstract class Unary extends Fun {
+  abstract class Unary extends Op {
     def f(a: Num): Num
     def f(exp: Exp): Exp
   }
@@ -56,8 +56,8 @@ object Function {
 
   case object UnaryAdd extends Unary {
     def f(a: Num) = a match {
-      case i:IntNum => makeNum(i.getVal)
-      case _ => makeNum(a.getDoubleVal)
+      case i:IntNum => makeNum(i getVal)
+      case _ => makeNum(a getDoubleVal)
     }
     def f(exp: Exp) = exp
   }

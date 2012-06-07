@@ -7,12 +7,7 @@ object Main {
   
 
   def main(args: Array[String]) = {
-    BuiltIns.addBuiltin("fact", BuiltinFunctions.fact)
-    BuiltIns.addBuiltin("cos", BuiltinFunctions.cos)
-    BuiltIns.addBuiltin("sin", BuiltinFunctions.sin)
-    BuiltIns.addBuiltin("tan", BuiltinFunctions.tan)
-    BuiltIns.addBuiltin("log", BuiltinFunctions.log)
-    BuiltIns.addBuiltin("sqrt", BuiltinFunctions.sqrt)
+    builtInFuncList.foreach(fun => BuiltIns.addBuiltin(fun.name, fun))
     prompt
   }
 
@@ -21,8 +16,8 @@ object Main {
     print(">> ")
     for (line <- io.Source.stdin.getLines) {
       try {
-        val exp = parser.parse(line)
-        println(exp.eval)
+        val exp = parser parse(line)
+        println(exp eval)
       } catch {
           case e: ParseException => e.printError
           case e: ArithmeticException => println("division by 0")

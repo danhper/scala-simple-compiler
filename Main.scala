@@ -4,6 +4,7 @@ object Main {
   import BuiltinFunctions._
   import Parser._
   import Lexer._
+  import Statement._
   
 
   def main(args: Array[String]) = {
@@ -12,21 +13,33 @@ object Main {
   }
 
   def prompt = {
-    var parser = new Pars(new Lex)
+    val inputStream = io.Source.fromInputStream(System.in).buffered;
+    var parser = new Pars(new Lex(inputStream));
+    var running = true
     print(">> ")
-    for (line <- io.Source.stdin.getLines) {
+    while(running) {
       try {
-        val exp = parser parse(line)
-        println(exp eval)
+        val stmt = parser.interactiveParse
+        stmt match {
+          case ExprStmt(exp) => println(exp.eval)
+          case EmptyStmt => ()
+          case FuncDef(name, varList, stmts) => println(name + ' ' + varList + ' ' + stmts)
+          case _ => ()
+        }
+
       } catch {
-          case e: ParseException => e.printError
-          case e: ArithmeticException => println("division by 0")
-          case e: BadTokenException => e.printError
-          case e: EvalException => e.printError
-          case e: NumberFormatException => println("overflow")
-          case e => e.printStackTrace
+        case e: ParseException => e.printError
+        case e: ArithmeticException => println("division by 0")
+        case e: BadTokenException => e.printError
+        case e: EvalException => e.printError
+        case e: NumberFormatException => println("overflow")
+        case e: EofException => running = false
+        case e => e.printStackTrace
       } finally {
-        print(">> ")
+        if(running)
+          print(">> ")
+        else
+          println
       }
     }
   }

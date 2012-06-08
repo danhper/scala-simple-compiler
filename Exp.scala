@@ -12,8 +12,8 @@ object Expression {
   object T {
     var table = new collection.mutable.HashMap[Var, Num]
     def addVar(key: Var, v: Num) = (table += ((key, v)))
-      def addVar(key: String, v: Num) = (table += ((Var(key), v)))
-        var lastInput: Exp = IntNum(0)
+    def addVar(key: String, v: Num) = (table += ((Var(key), v)))
+    var lastInput: Exp = IntNum(0)
   }
 
   object BuiltIns {

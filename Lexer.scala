@@ -15,11 +15,11 @@ object Lexer {
     def printError = println(s)
   }
 
-  class Lex {
+  class Lex(buffer: BufferedIterator[Char]) {
     var line: String = null
 
-    def advance = if (!line.isEmpty) line = line substring(1)
-    def lookAhead: Option[Char] = line headOption
+    def advance = buffer next
+    def lookAhead: Option[Char] = if(buffer hasNext) Some(buffer head) else None
 
     def parseNumber = {
       def getIntString(s: String, decPart: Boolean): String = lookAhead match {
@@ -42,7 +42,7 @@ object Lexer {
 
     def getToken: Token = nativeToken match {
       case One(' ') | One('\t') => getToken
-      case One('\n') => Eof
+      case One('\n') => NewLine
       case token => token
     }
 
@@ -62,10 +62,6 @@ object Lexer {
         case c if c.toString matches("[=+/*'^-]") => advance; Op(c toString)
         case _ => advance; One(c)
       }
-    }
-    
-    def init(s: String) = {
-      line = s
     }
   }
 }

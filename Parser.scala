@@ -6,35 +6,53 @@ object Parser {
   class ParseException(err: String) extends Exception {
     def printError = println("parse error : " + err)
   }
+  
+  class EofException extends Exception
 
   class Pars(lexer: Lex) {
-    var token: Token = Eof
-    var eval: Boolean = false
+    var token: Token = null
 
     def advance = token = lexer getToken
-    def eat(t: Token) = token match {
-      case t if token == t => advance
-      case _ => error("error at token " + token + " expected " + t)
+    def eat(t: Token) = {
+      if(t == token) advance 
+      else error("error at token " + token + " expected " + t)
     }
 
-    def error(s: String) = throw new ParseException(s)
+    def error(s: String) = {
+      while(token != NewLine && token != Eof) {
+        advance
+      }
+      throw new ParseException(s)
+    }
 
-    def parse(s: String): Exp = {
-      lexer init(s)
+    def interactiveParse: Stmt = {
       advance
-      T.lastInput = parseExpression
       token match {
-        case Eof => T.lastInput
-        case n => error("wrong token " + token + " at end of line")
+        case NewLine => EmptyStmt
+        case Eof => throw new EofException
+        case _ =>  {
+          val stmt = parseStatement
+          token match {
+            case NewLine => stmt
+            case Eof => throw new EofException
+            case n => error("wrong token " + token + " at end of line")
+          }
+        }
       }
     }
 
     def parseStatements: StmtList = {
-      def parseAll(stmts: List[Stmt]): StmtList = token match {
-        case Eof => StmtList(stmts)
-        case _ => {
-          val stmt = parseStatement
-          parseAll(stmts :+ stmt)
+      def parseAll(stmts: List[Stmt]): StmtList = {
+          
+        token match {
+          case Eof => StmtList(stmts)
+          case KeyWord("end") => StmtList(stmts)
+          case NewLine => advance; parseAll(stmts)
+          case _ => {
+            val stmt = parseStatement
+            eat(NewLine)
+            parseAll(stmts :+ stmt)
+          }
         }
       }
       parseAll(List())
@@ -45,12 +63,15 @@ object Parser {
         case "fun" => advance; parseFunctionDef
         case _ => error("Wrong keyword " + s)
       }
-      case _ => ExprStmt(parseExpression)
+      case _ =>  {
+        T.lastInput = parseExpression
+        ExprStmt(T.lastInput)
+      }
     }
 
     def parseFunctionDef: FuncDef = {
       val name = token match {
-        case Id(s) => s
+        case Id(s) => advance; s
         case _ => error("missing function name" + token)
       }
       val varList = parseFormalParameters
@@ -60,6 +81,7 @@ object Parser {
     
     def parseBlock: StmtList = {
       eat(One(':'))
+      eat(NewLine)
       val stmts = parseStatements
       eat(KeyWord("end"))
       stmts

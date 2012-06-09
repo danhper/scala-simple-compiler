@@ -1,22 +1,18 @@
 object Main {
-  import Expression._
-  import Function._
   import BuiltinFunctions._
-  import Parser._
-  import Lexer._
-  import Statement._
-  import Operator._
-  
 
   def main(args: Array[String]) = {
     StackFrame.startNewFrame
     builtInFuncList.foreach(fun => StackFrame.addValue(fun.name, fun))
     prompt
   }
-
+  
+  /**
+   * Runs the interactive interpreter
+   */
   def prompt = {
-    val inputStream = io.Source.fromInputStream(System.in).buffered;
-    var parser = new Pars(new Lex(inputStream));
+    val inputStream = io.Source.fromInputStream(System.in).buffered
+    var parser = new Parser(new Lexer(inputStream))
     var running = true
     print(">> ")
     while(running) {
@@ -28,12 +24,8 @@ object Main {
           case _ => println(obj)
         }
       } catch {
-        case e: ParseException => e.printError
+        case e: Printable => e.printError
         case e: ArithmeticException => println("division by 0")
-        case e: BadTokenException => e.printError
-        case e: EvalException => e.printError
-        case e: TypeException => println("incompatible types")
-        case e: UndefinedException => e.printError
         case e: NumberFormatException => println("overflow")
         case e: EofException => running = false
         case e => e.printStackTrace

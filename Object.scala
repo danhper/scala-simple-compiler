@@ -1,12 +1,19 @@
-import Expression._
-import Statement._
 import BuiltinFunctions._
 
+/**
+ * Represents an object (integer, double, function)
+ */
 abstract class Object extends Exp
 
+/**
+ * Represents a number (integer or double)
+ */
 abstract class Num extends Object {
   def eval = this
   def getDoubleVal: Double
+  /**
+   * Overloading of operators to get a double number
+   */
   def +(that: Num): DoubleNum = DoubleNum(this.getDoubleVal + that.getDoubleVal)
   def -(that: Num): DoubleNum = DoubleNum(this.getDoubleVal - that.getDoubleVal)
   def *(that: Num): DoubleNum = DoubleNum(this.getDoubleVal * that.getDoubleVal)
@@ -14,8 +21,15 @@ abstract class Num extends Object {
   def **(that: Num): DoubleNum = DoubleNum(math.pow(this.getDoubleVal, that.getDoubleVal))
 }
 
+/**
+ * Represents an integer
+ * @param n the integer value
+ */
 case class IntNum(n: Int) extends Num {
   override def toString = n toString
+  /**
+   * Overloading of operators to get an integer
+   */
   def +(that: IntNum): IntNum = IntNum(this.n + that.n)
   def -(that: IntNum): IntNum = IntNum(this.n - that.n)
   def *(that: IntNum): IntNum = IntNum(this.n * that.n)
@@ -25,17 +39,33 @@ case class IntNum(n: Int) extends Num {
   def getDoubleVal = n
 }
 
+/**
+ * Represents a double
+ * @param n the double value
+ */
 case class DoubleNum(n: Double) extends Num {
   override def toString = n toString
   def getVal: Double = n
   def getDoubleVal = n
 }
 
-
+/**
+ * Represents a function
+ * @param name the function name
+ * @param paramNumber the number of arguments of the function
+ */
 abstract class Fun(name: String, paramNumber: Int) extends Object {
   def eval = this
+  /**
+   * Executes the function
+   * @param params the parameters to give to the function
+   * @return Object the result of the function computation
+   */
   def execute(params: List[Exp]): Object
 
+  /**
+   * Checks the given number of arguments when calling the function
+   */ 
   def checkParamsNum(params: List[Exp]) = {
     if(params.length != paramNumber) {
       throw new EvalException("function " + name + " expects " + paramNumber + " parameters, " + params.length + " given") 
@@ -43,6 +73,10 @@ abstract class Fun(name: String, paramNumber: Int) extends Object {
   }
 }
 
+/**
+ * Represents a built-in function
+ * @param fun the function to execute
+ */
 case class BuiltInFun(name: String, paramNumber: Int, fun: (List[Object] => Num)) extends Fun(name, paramNumber) {
   def execute(params: List[Exp]) = {
     checkParamsNum(params)
@@ -50,6 +84,10 @@ case class BuiltInFun(name: String, paramNumber: Int, fun: (List[Object] => Num)
   }
 }
 
+/**
+ * Represents a function declared in the program
+ * @param stmts the statements to execute
+ */
 case class DeclaredFunction(name: String, varList: List[Var], stmts: StmtList) extends Fun(name, varList length) {
   def execute(params: List[Exp]) = {
     checkParamsNum(params)
@@ -61,6 +99,9 @@ case class DeclaredFunction(name: String, varList: List[Var], stmts: StmtList) e
   }
 }
 
+/**
+ * Represents a null value
+ */
 case object Null extends Object {
   def eval = Null
 }

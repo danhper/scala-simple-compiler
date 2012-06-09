@@ -1,24 +1,33 @@
+/**
+ * Object containing program builtins functions
+ */
 object BuiltinFunctions {
-  import Expression._
-  import Operator._
-
-  class CalcException(err: String) extends Exception 
-
+  /**
+   * Converts a list of object to a number
+   * to use sin, cos, tan with the parameters (List[Object])
+   * @param li the list to convert
+   * @return Num the converted number
+   */
   implicit def objList2Num(li: List[Object]) = li.head match {
     case n: Num => n
-    case _ => throw new TypeException
+    case n => throw new TypeException(n)
   }
-
+  
+  /**
+   * Computes the factorial of a number
+   * @param List[Object] list of object converted to num
+   * @return IntNum
+   */
   def fact(n: List[Object]): Num = n match {
     case i: IntNum => IntNum(fact(i getVal))
-    case _ => throw new CalcException("Double factorial")
+    case _ => throw new TypeException(n)
   }
   def fact(n: Int): Int = {
     def fact_(n: Int, acc: Int): Int = n match {
       case 0 => acc
       case _ => fact_(n - 1, acc * n)
     }
-    if(n >= 0) fact_(n, 1) else throw new CalcException("Negative fact")
+    if(n >= 0) fact_(n, 1) else throw new CalcException("factorial not defined for negative numbers")
   }
   
   def cos(n: List[Object]): Num = DoubleNum(math.cos(n.getDoubleVal))

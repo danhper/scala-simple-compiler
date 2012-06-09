@@ -3,11 +3,11 @@ import BuiltinFunctions._
 /**
  * Represents an object (integer, double, function)
  */
-abstract class Object extends Exp
-
-abstract class Value extends Object {
+abstract class Object extends Exp { 
   def eval = this
 }
+
+abstract class Value extends Object
 
 /**
  * Represents a number (integer or double)
@@ -82,7 +82,6 @@ case class DoubleNum(n: BigDecimal) extends Num {
  * @param paramNumber the number of arguments of the function
  */
 abstract class Fun(name: String, paramNumber: Int) extends Object {
-  def eval = this
   /**
    * Executes the function
    * @param params the parameters to give to the function
@@ -116,9 +115,14 @@ case class BuiltInFun(name: String, paramNumber: Int, fun: (List[Object] => Num)
  * @param stmts the statements to execute
  */
 case class DeclaredFunction(name: String, varList: List[Var], stmts: StmtList) extends Fun(name, varList length) {
+  override def toString = {
+    "function: " + name + "(" + 
+      (varList map (_ toString) reduceRight(_ + ", " + _)) +  ")"
+  }
+  val stackFrame = StackFrame(StackFrame.getCurrentFrame)
   def execute(params: List[Exp]) = {
     checkParamsNum(params)
-    StackFrame.startNewFrame
+    StackFrame.startNewFrame(stackFrame)
     varList zip(params) foreach {case (v, exp) => StackFrame.addValue(v, exp eval)}
     val ret = stmts.execute
     StackFrame.stopFrame
@@ -135,5 +139,5 @@ case object False extends Bool
  * Represents a null value
  */
 case object Null extends Object {
-  def eval = Null
+  override def eval = Null
 }

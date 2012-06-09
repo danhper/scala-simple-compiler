@@ -12,6 +12,15 @@ object StackFrame {
    * The program last input
    */
   var lastInput: Stmt = EmptyStmt
+
+  def apply(stackFrame: StackFrame): StackFrame = {
+    var frame = new StackFrame
+    frame.table = stackFrame.table.clone
+    frame
+  }
+
+  def getCurrentFrame: StackFrame = stack.head
+
   /**
    * Adds a value (variable or function) to the current stack frame
    * @param key the value name
@@ -29,10 +38,16 @@ object StackFrame {
     case Some(frame) => frame getVal(key)
     case None => throw new UndefinedException(key)
   }
+
+  def getValueOption(key: Var): Option[Object] = stack find (frame => frame hasVal(key)) match {
+    case Some(frame) => Some(frame getVal(key))
+    case None => None
+  }
+ 
   /**
    * Creates a new stack frame
    */
-  def startNewFrame = stack push(new StackFrame)
+  def startNewFrame(stackFrame: StackFrame) = stack push(stackFrame)
   /**
    * Deletes the last stack frame
    */
@@ -46,7 +61,7 @@ class StackFrame {
   /**
    * The variables of the stack frame
    */
-  val table = new collection.mutable.HashMap[Var, Object]
+  var table = new collection.mutable.HashMap[Var, Object]
   /**
    * Adds a value (variable or function)
    * @param key the value name

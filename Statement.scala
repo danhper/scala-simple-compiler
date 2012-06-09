@@ -30,6 +30,14 @@ case class ExprStmt(exp: Exp) extends Stmt {
   def execute = exp eval
 }
 
+case class AssignStmt(v: Var, exp: Exp) extends Stmt {
+  def execute = {
+    val exprVal = exp.eval
+    StackFrame.addValue(v, exprVal)
+    Null
+  }
+}
+
 /**
  * Represents a list of statements (as in a block)
  */
@@ -45,7 +53,7 @@ case class StmtList(stmtList: List[Stmt]) extends Stmt {
   def isEmpty = stmtList isEmpty
 }
 
-case class IfStmt(cond: Condition, stmts: StmtList, elif: List[IfStmt], els: Option[StmtList]) extends Stmt {
+case class IfStmt(cond: Exp, stmts: StmtList, elif: List[IfStmt], els: Option[StmtList]) extends Stmt {
   def execute = {
     if(cond.eval == True) { 
       stmts execute

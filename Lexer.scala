@@ -8,6 +8,12 @@ case class DoubleTok(v: BigDecimal) extends Token
 case class Id(s: String) extends Token
 /** Represents an operator */
 case class Op(s: String) extends Token
+/** Represents an assignment operator */
+case class AssignOp(s: String) extends Token
+/** Represents a comparison operator */
+case class CompOp(s: String) extends Token
+/** Represents a logic operator */
+case class LogicOp(s: String) extends Token
 /** Represents a single symbol */
 case class One(c: Char) extends Token
 /** Represents a keyword */
@@ -22,7 +28,16 @@ case object NewLine extends Token
  * Contains a list of the keywords
  */
 object Lexer {
-  val KeyWords = List("fun", "end", "if", "print")
+  val KeyWords = List("fun", "end", "if", "print", "elif", "else")
+  val operators = "-+*/%^"
+  val logicOperators = "!&|"
+  val compOperators = "<>=!"
+  def isOperator(c: Char): Boolean = isOperator(c toString)
+  def isOperator(s: String): Boolean = s matches("[" + operators + "]")
+  def isCompOperator(c: Char): Boolean = isCompOperator(c toString)
+  def isCompOperator(s: String): Boolean = s matches("[" + compOperators + "]")
+  def isLogicOperator(c: Char): Boolean = isLogicOperator(c toString)
+  def isLogicOperator(s: String): Boolean = s matches("[" + logicOperators + "]")
 }
 
 /**
@@ -89,6 +104,38 @@ class Lexer(buffer: BufferedIterator[Char]) {
       case _ => if(Lexer.KeyWords contains(s)) KeyWord(s) else Id(s)
     }
   }
+
+  def getOperator(c: Char): Token = lookAhead match {
+    case None => Op(c toString)
+    case Some(x) => x match {
+      case '=' => advance; AssignOp(c + "=")
+      case '+' if c == '+' => advance; AssignOp("++")
+      case '-' if c == '-' => advance; AssignOp("--")
+      case _ => Op(c toString)
+    }
+  }
+
+  def getCompOperator(c: Char): Token = lookAhead match {
+    case None => CompOp(c toString)
+    case Some(x) => x match {
+      case '=' => advance; CompOp(c + "=")
+      case _ => c match {
+        case '!' => LogicOp(c toString)
+        case '=' => AssignOp(c toString)
+        case _ => CompOp(c toString)
+      }
+    }
+  }
+
+  def getLogicOperator(c: Char): Token = lookAhead match {
+    case None => throw new BadTokenException("Bad token " + c)
+    case Some(x) => (c, x) match {
+      case ('!', _) => LogicOp("!")
+      case ('&', '&') => advance; LogicOp("&&")
+      case ('|', '|') => advance; LogicOp("||")
+      case n => throw new BadTokenException("Bad token " + c + n)
+    }
+  }
   
   /**
    * Evaluates the first character found and get the token
@@ -99,7 +146,9 @@ class Lexer(buffer: BufferedIterator[Char]) {
     case Some(c) => c match {
       case c if c isDigit => parseNumber
       case c if c.toString matches("[_0-9a-zA-Z]") => getId("")
-      case c if c.toString matches("[=+/*'^-]") => advance; Op(c toString)
+      case c if Lexer.isOperator(c) => advance; getOperator(c)
+      case c if Lexer.isCompOperator(c) => advance; getCompOperator(c)
+      case c if Lexer.isLogicOperator(c) => advance; getLogicOperator(c)
       case _ => advance; One(c)
     }
   }

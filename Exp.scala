@@ -31,6 +31,7 @@ abstract class Exp {
   def -(other: Exp): Exp = Exp.makeBinaryApp(Sub, this, other)
   def *(other: Exp): Exp = Exp.makeBinaryApp(Mul, this, other)
   def /(other: Exp): Exp = Exp.makeBinaryApp(Div, this, other)
+  def %(other: Exp): Exp = Exp.makeBinaryApp(Mod, this, other)
   def **(other: Exp): Exp = Exp.makeBinaryApp(Pow, this, other)
   def unary_- = Exp.makeUnaryApp(UnarySub, this)
 }
@@ -63,7 +64,6 @@ case class FunCall(funcName: Var, params: List[Exp]) extends Exp {
  */
 case class Var(s: String) extends Exp {
   override def toString = s
-  def :=(other: Exp): Exp = Exp.makeBinaryApp(DefVar, this, other)
   /**
    * Looks up for the variable in the current stack frame
    * @return Object
@@ -86,13 +86,22 @@ case class App(fun: Operator, exp: Exp, other: Option[Exp]) extends Exp {
   def eval = fun match {
     case un: Unary => un f(exp eval)
     case bin: Binary => bin f(exp eval, other.get eval)
-    case d @ DefVar => exp match {
-      case v: Var => d.assign(v, other get)
-      case _ => throw new EvalException("Wrong assignement")
+  }
+}
+
+
+case class LogicExp(f: LogicOperator, exp: Exp, other: Option[Exp]) extends Exp {
+  import CompOperator._
+  def eval = { 
+    f match {
+      case Or | And => f.fun(exp eval, Some(other.get eval))
+      case Not => f.fun(exp eval, None)
     }
   }
 }
 
-case class Condition(fun: Operator, exp: Exp, other: Option[Exp]) extends Exp {
-  def eval = True
+case class Test(op: CompOperator, exp: Exp, other: Exp) extends Exp{
+  def eval = op.fun(exp eval, other eval)
 }
+
+

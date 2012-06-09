@@ -8,11 +8,23 @@ class Parser(lexer: Lexer) {
   var interactiveMode = false
   var indentDepth = 0
 
+  val nextTokens = new collection.mutable.Queue[Token]
+
   /**
    * Returns the next token
    * @return Token
    */
-  def advance = token = lexer getToken
+  def advance = token = {
+    if(nextTokens isEmpty) lexer getToken
+    else nextTokens dequeue
+  }
+  
+  def lookAhead = {
+    val tok = lexer.getToken
+    nextTokens enqueue(tok)
+    tok
+  }
+
   /**
    * Checks the next token and returns it
    * @param t token to compare the next token to
@@ -31,6 +43,7 @@ class Parser(lexer: Lexer) {
     while(token != NewLine && token != Eof) {
       advance
     }
+    indentDepth = 0
     throw new ParseException(s)
   }
 
@@ -51,7 +64,8 @@ class Parser(lexer: Lexer) {
           case e: ExprStmt => StackFrame.lastInput = e
           case _ => ()
         }
-        token match {
+        val toCheck = if(nextTokens isEmpty) token else nextTokens.last
+        toCheck match {
           case NewLine => stmt
           case Eof => throw new EofException
           case n => error("wrong token " + token + " at end of line")
@@ -77,7 +91,7 @@ class Parser(lexer: Lexer) {
     def parseAll(stmts: List[Stmt]): StmtList = {
       token match {
         case Eof => StmtList(stmts)
-        case KeyWord("end") => StmtList(stmts)
+        case KeyWord("end") | KeyWord("elif") | KeyWord("else")=> StmtList(stmts)
         case NewLine => printIndent; advance; parseAll(stmts)
         case _ => {
           val stmt = parseStatement
@@ -98,12 +112,58 @@ class Parser(lexer: Lexer) {
     case KeyWord(s) => s match {
       case "fun" => advance; parseFunctionDef
       case "print" => advance; parsePrint
-//      case "if" => advance; parseIf
+      case "if" => advance; parseIf
       case _ => error("Wrong keyword " + s)
     }
-    case _ =>  {
-      ExprStmt(parseExpression)
+    case Id(s) => lookAhead match {
+      case AssignOp(a) => {
+        advance; advance
+        parseAssign(s, a)
+      }
+      case _ => ExprStmt(parseExpression)
     }
+    case _ => ExprStmt(parseExpression)
+  }
+
+  def parseIf: Stmt =  {
+    def parseElif(ifs: List[IfStmt]): List[IfStmt] = token match {
+      case KeyWord("elif") => {
+        advance
+        val cond = parseOrTest
+        val stmts = parseBlock(true)
+        parseElif(ifs :+ IfStmt(cond, stmts, Nil, None))
+      }
+      case _ => ifs
+    }
+
+    val cond = parseOrTest
+    val stmts = parseBlock(true)
+    val ifs = parseElif(Nil)
+    val elseStmt = token match {
+      case KeyWord("else") => advance; Some(parseBlock(false))
+      case KeyWord("end") => advance; None
+      case _ => error("missing 'end' at end of if")
+    }
+    IfStmt(cond, stmts, ifs, elseStmt)
+  }
+
+
+  def parseAssign(s: String, a: String): Stmt = a match {
+    case "=" => AssignStmt(Var(s), parseExpression)
+    case _ => {
+      val v = Var(s)
+      a match {
+        case "++" => AssignStmt(v, v + IntNum(1))
+        case "--" => AssignStmt(v, v - IntNum(1))
+        case "+=" => AssignStmt(v, v + parseExpression)
+        case "-=" => AssignStmt(v, v - parseExpression)
+        case "*=" => AssignStmt(v, v * parseExpression)
+        case "/=" => AssignStmt(v, v / parseExpression)
+        case "%=" => AssignStmt(v, v % parseExpression)
+        case "^=" => AssignStmt(v, v ** parseExpression)
+        case _ => error("wrong assignment operator " + a)
+      }
+    } 
   }
 
   /**
@@ -128,7 +188,7 @@ class Parser(lexer: Lexer) {
       case _ => error("missing function name" + token)
     }
     val varList = parseFormalParameters
-    val stmts = parseBlock
+    val stmts = parseBlock(false)
     if(stmts isEmpty)
       error("A function body cannot be empty")
     FuncDef(name, varList, stmts)
@@ -139,14 +199,15 @@ class Parser(lexer: Lexer) {
    * the keyword 'end'
    * @return StmtList the statements in the block
    */
-  def parseBlock: StmtList = {
+  def parseBlock(isIf: Boolean): StmtList = {
     indentDepth += 3
     eat(One(':'))
     printIndent
     eat(NewLine)
     val stmts = parseStatements
     indentDepth -= 3
-    eat(KeyWord("end"))
+    if(!isIf)
+      eat(KeyWord("end"))
     stmts
   }
 
@@ -200,12 +261,14 @@ class Parser(lexer: Lexer) {
    * Parses a term of the form
    * pow (* term)*
    * pow (/ term)*
+   * pow (% term)*
    * @return Exp
    */
   def parseTerm: Exp = {
     def parseRightTerm(exp: Exp): Exp = token match {
       case Op("*") => advance; parseRightTerm(exp * parsePow)
       case Op("/") => advance; parseRightTerm(exp / parsePow)
+      case Op("%") => advance; parseRightTerm(exp % parsePow)
       case _ => exp
     }
     parseRightTerm(parsePow)
@@ -247,17 +310,58 @@ class Parser(lexer: Lexer) {
     case Op("+") => advance; parseFactor
     case Op("-") => advance; -parseFactor
     case Id(s) => advance; token match {
-      case Op("=") => advance; Var(s) := parseExpression
       case One('(') => FunCall(Var(s), parseParameters)
       case _ => Var(s)
     }
-    case One('%') => advance; StackFrame.lastInput match {
+    case One('$') => advance; StackFrame.lastInput match {
       case ExprStmt(exp) => exp
       case _ => error("last input is not an expression")
     }
     case One(')') => error("missing left bracket")
     case _ => error("missing operand at token " + token)
   }
+
+  def parseOrTest: Exp =  {
+    def parseRightTest(exp: Exp): Exp = token match {
+      case LogicOp("||") => advance; parseRightTest(LogicExp(Or, exp, Some(parseAndTest)))
+      case _ => exp
+    }
+    parseRightTest(parseAndTest)
+  }
+
+  def parseAndTest: Exp =  {
+    def parseRightTest(exp: Exp): Exp = token match {
+      case LogicOp("&&") => advance; parseRightTest(LogicExp(And, exp, Some(parseNotTest)))
+      case _ => exp
+    }
+    parseRightTest(parseNotTest)
+  }
+
+  def parseNotTest: Exp = token match {
+    case LogicOp("!") => advance; LogicExp(Not, parseCompTest, None)
+    case _ => parseCompTest
+  }
+
+  def parseCompTest: Exp = {
+    def parseRightTest(exp: Exp): Exp = token match {
+      case CompOp(s) => {
+        advance
+        val test = s match {
+          case "==" => Test(Eq, exp, parseExpression)
+          case "!=" => Test(Neq, exp, parseExpression)
+          case "<" => Test(Lt, exp, parseExpression)
+          case "<=" => Test(Lte, exp, parseExpression)
+          case ">=" => Test(Gt, exp, parseExpression)
+          case ">" => Test(Gte, exp, parseExpression)
+          case _ => error("unknown comparison " + s)
+        }
+        parseRightTest(test)
+      }
+      case _ => exp
+    }
+    parseRightTest(parseExpression)
+  }
 }
+
 
 

@@ -33,6 +33,10 @@ abstract class Num extends Value {
   /**
    * Overloading of operator to get a double value
    */
+  def %(that: Num): DoubleNum = DoubleNum(this.getDoubleVal % that.getDoubleVal)
+  /**
+   * Overloading of operator to get a double value
+   */
   def **(that: Num): DoubleNum = DoubleNum(doublePow(this.getDoubleVal, that.getDoubleVal))
 }
 
@@ -58,6 +62,10 @@ case class IntNum(n: BigInt) extends Num {
    * Overloading of operator to get an integer
    */
   def /(that: IntNum): IntNum = IntNum(this.n / that.n)
+  /**
+   * Overloading of operator to get an integer
+   */
+  def %(that: IntNum): IntNum = IntNum(this.n % that.n)
   /**
    * Overloading of operator to get an integer
    */
@@ -130,7 +138,11 @@ case class DeclaredFunction(name: String, varList: List[Var], stmts: StmtList) e
   }
 }
 
-abstract class Bool extends Value
+abstract class Bool extends Value {
+  def ||(that: Bool) = Or.fun(this, that)
+  def &&(that: Bool) = And.fun(this, that)
+  def ! = Not.fun(this)
+}
 
 case object True extends Bool
 case object False extends Bool

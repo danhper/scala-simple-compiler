@@ -4,23 +4,6 @@
 abstract class Operator
 
 /**
- * Represents the assignment operator =
- */
-case object DefVar extends Operator {
-  /**
-   * Assigns the expression e to the variable v in the current stack frame
-   * @param v the variable to be assigned
-   * @param e the expression to assign
-   * @return returns the expression to assign
-   */
-  def assign(v: Var, e: Exp) = {
-    val exprVal = e.eval
-    StackFrame.addValue(v, exprVal)
-    exprVal
-  }
-}
-
-/**
  * Represents a binary operator
  */
 abstract class Binary extends Operator {
@@ -98,6 +81,18 @@ case object Div extends Binary {
   }
   def f(exp1: Exp, exp2: Exp) = exp1 / exp2
 }
+
+/**
+ * Represents a modulo op
+ */
+case object Mod extends Binary {
+  def f(a: Num, b: Num) = (a, b) match {
+    case (i: IntNum, j: IntNum) => i % j
+    case _ => a % b
+  }
+  def f(exp1: Exp, exp2: Exp) = exp1 % exp2
+}
+
 
 /**
  * Represents an exponentiation

@@ -5,6 +5,7 @@ object Main {
   import Parser._
   import Lexer._
   import Statement._
+  import Operator._
   
 
   def main(args: Array[String]) = {
@@ -31,6 +32,7 @@ object Main {
         case e: ArithmeticException => println("division by 0")
         case e: BadTokenException => e.printError
         case e: EvalException => e.printError
+        case e: TypeException => println("incompatible types")
         case e: UndefinedException => e.printError
         case e: NumberFormatException => println("overflow")
         case e: EofException => running = false

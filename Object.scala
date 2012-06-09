@@ -12,12 +12,24 @@ abstract class Num extends Object {
   def eval = this
   def getDoubleVal: Double
   /**
-   * Overloading of operators to get a double number
+   * Overloading of operators to get a double value
    */
   def +(that: Num): DoubleNum = DoubleNum(this.getDoubleVal + that.getDoubleVal)
+  /**
+   * Overloading of operators to get a double value
+   */
   def -(that: Num): DoubleNum = DoubleNum(this.getDoubleVal - that.getDoubleVal)
+  /**
+   * Overloading of operators to get a double value
+   */
   def *(that: Num): DoubleNum = DoubleNum(this.getDoubleVal * that.getDoubleVal)
+  /**
+   * Overloading of operators to get a double value
+   */
   def /(that: Num): DoubleNum = DoubleNum(this.getDoubleVal / that.getDoubleVal)
+  /**
+   * Overloading of operators to get a double value
+   */
   def **(that: Num): DoubleNum = DoubleNum(math.pow(this.getDoubleVal, that.getDoubleVal))
 }
 
@@ -28,12 +40,24 @@ abstract class Num extends Object {
 case class IntNum(n: Int) extends Num {
   override def toString = n toString
   /**
-   * Overloading of operators to get an integer
+   * Overloading of operator to get an integer
    */
   def +(that: IntNum): IntNum = IntNum(this.n + that.n)
+  /**
+   * Overloading of operator to get an integer
+   */
   def -(that: IntNum): IntNum = IntNum(this.n - that.n)
+  /**
+   * Overloading of operator to get an integer
+   */
   def *(that: IntNum): IntNum = IntNum(this.n * that.n)
+  /**
+   * Overloading of operator to get an integer
+   */
   def /(that: IntNum): IntNum = IntNum(this.n / that.n)
+  /**
+   * Overloading of operator to get an integer
+   */
   def **(that: IntNum): IntNum = IntNum(intPow(this.n, that.n))
   def getVal: Int = n
   def getDoubleVal = n

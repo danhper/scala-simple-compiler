@@ -1,3 +1,6 @@
+import java.math.{MathContext=>jMC} 
+import java.math.{RoundingMode=>jRM} 
+
 /**
  * Object containing program builtins functions
  */
@@ -12,7 +15,7 @@ object BuiltinFunctions {
     case n: Num => n
     case n => throw new TypeException(n)
   }
-  
+
   /**
    * Computes the factorial of a number
    * @param List[Object] list of object converted to num
@@ -38,6 +41,30 @@ object BuiltinFunctions {
 
   implicit def bigIntToBigDec(n: BigInt) = BigDecimal(n)
 
+  def abs(li: List[Object]) = li.head match {
+    case IntNum(b) => IntNum(b abs)
+    case DoubleNum(b) => DoubleNum(b abs)
+    case n => throw new TypeException(n)
+  }
+ 
+  def ceil(li: List[Object]) = li.head match {
+    case v: IntNum => v
+    case DoubleNum(n) => IntNum(n round(new jMC(1, jRM.CEILING)) toBigInt)
+    case n => throw new TypeException(n)
+  }
+
+  def round(li: List[Object]) = li.head match {
+    case v: IntNum => v
+    case DoubleNum(n) => IntNum(n round(new jMC(1)) toBigInt)
+    case n => throw new TypeException(n)
+  }
+
+  def floor(li: List[Object]) = li.head match {
+    case v: IntNum => v
+    case DoubleNum(n) => IntNum(n round(new jMC(1, jRM.FLOOR)) toBigInt)
+    case n => throw new TypeException(n)
+  }
+
   def intPow(x: BigDecimal, n: BigInt): BigDecimal = n match {
       case n if n <= 0 => 1
       case n if n % 2 == 0 => val tmp = intPow(x, n / 2); tmp * tmp
@@ -49,15 +76,7 @@ object BuiltinFunctions {
     case _ => throw new CalcException("wrong arguments for function log")
   }
 
-  def ln(li: List[Object]): Num = li.head match {
-    case i: Num => DoubleNum(ln(i getDoubleVal))
-    case n => throw new TypeException(n)
-  }
-
-  def exp(li: List[Object]): Num = li.head match {
-    case i: Num => DoubleNum(exp(i getDoubleVal))
-    case n => throw new TypeException(n)
-  }
+  def exp(li: List[Object]): Num = DoubleNum(exp(li getDoubleVal))
 
   def exp(x: BigDecimal) = {
     var n: BigDecimal = BigDecimal(0)
@@ -66,6 +85,8 @@ object BuiltinFunctions {
     }
     n
   }
+
+  def ln(li: List[Object]): Num = DoubleNum(ln(li getDoubleVal))
 
   def ln(x: BigDecimal) = {
     var n: BigDecimal = BigDecimal(0)
@@ -87,8 +108,13 @@ object BuiltinFunctions {
   val factFun = BuiltInFun("fact", 1, fact)
   val lnFun = BuiltInFun("ln", 1, ln)
   val expFun = BuiltInFun("exp", 1, exp)
+  val absFun = BuiltInFun("abs", 1, abs)
+  val floorFun = BuiltInFun("floor", 1, floor)
+  val ceilFun = BuiltInFun("ceil", 1, ceil)
+  val roundFun = BuiltInFun("round", 1, round)
 
   val builtInFuncList = List(cosFun, sinFun, tanFun, expFun,
-                             logFun, sqrtFun, factFun, lnFun)
+                             logFun, sqrtFun, factFun, lnFun,
+                             absFun, floorFun, ceilFun, roundFun)
 
 }

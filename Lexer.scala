@@ -1,9 +1,9 @@
 /** Represents tokens used in [[Lexer]] */
 abstract class Token
 /** Represents an integer */
-case class IntTok(v: Int) extends Token
+case class IntTok(v: BigInt) extends Token
 /** Represents a floating number */
-case class DoubleTok(v: Double) extends Token
+case class DoubleTok(v: BigDecimal) extends Token
 /** Represents an identifier */
 case class Id(s: String) extends Token
 /** Represents an operator */
@@ -59,10 +59,10 @@ class Lexer(buffer: BufferedIterator[Char]) {
     }
     val intPart = getIntString("", false)
     lookAhead match {
-      case None => IntTok(intPart toInt)
+      case None => IntTok(BigInt(intPart))
       case Some(c) => c match {
-        case '.' => advance; DoubleTok((intPart + c + getIntString("", true)) toDouble)
-        case _ => IntTok(intPart toInt)
+        case '.' => advance; DoubleTok(BigDecimal(intPart + c + getIntString("", true)))
+        case _ => IntTok(BigInt(intPart))
       }
     }
   }

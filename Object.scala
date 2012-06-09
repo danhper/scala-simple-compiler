@@ -10,7 +10,7 @@ abstract class Object extends Exp
  */
 abstract class Num extends Object {
   def eval = this
-  def getDoubleVal: Double
+  def getDoubleVal: BigDecimal
   /**
    * Overloading of operators to get a double value
    */
@@ -30,14 +30,14 @@ abstract class Num extends Object {
   /**
    * Overloading of operators to get a double value
    */
-  def **(that: Num): DoubleNum = DoubleNum(math.pow(this.getDoubleVal, that.getDoubleVal))
+  def **(that: Num): DoubleNum = DoubleNum(math.pow(this.getDoubleVal doubleValue, that.getDoubleVal doubleValue))
 }
 
 /**
  * Represents an integer
  * @param n the integer value
  */
-case class IntNum(n: Int) extends Num {
+case class IntNum(n: BigInt) extends Num {
   override def toString = n toString
   /**
    * Overloading of operator to get an integer
@@ -59,17 +59,17 @@ case class IntNum(n: Int) extends Num {
    * Overloading of operator to get an integer
    */
   def **(that: IntNum): IntNum = IntNum(intPow(this.n, that.n))
-  def getVal: Int = n
-  def getDoubleVal = n
+  def getVal: BigInt = n
+  def getDoubleVal = BigDecimal(n)
 }
 
 /**
  * Represents a double
  * @param n the double value
  */
-case class DoubleNum(n: Double) extends Num {
+case class DoubleNum(n: BigDecimal) extends Num {
   override def toString = n toString
-  def getVal: Double = n
+  def getVal: BigDecimal = n
   def getDoubleVal = n
 }
 

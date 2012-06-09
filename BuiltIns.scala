@@ -22,21 +22,21 @@ object BuiltinFunctions {
     case i: IntNum => IntNum(fact(i getVal))
     case _ => throw new TypeException(n)
   }
-  def fact(n: Int): Int = {
-    def fact_(n: Int, acc: Int): Int = n match {
-      case 0 => acc
+  def fact(n: BigInt): BigInt = {
+    def fact_(n: BigInt, acc: BigInt): BigInt = n match {
+      case n if n == 0 => acc
       case _ => fact_(n - 1, acc * n)
     }
     if(n >= 0) fact_(n, 1) else throw new CalcException("factorial not defined for negative numbers")
   }
   
-  def cos(n: List[Object]): Num = DoubleNum(math.cos(n.getDoubleVal))
-  def sin(n: List[Object]): Num = DoubleNum(math.sin(n.getDoubleVal))
-  def tan(n: List[Object]): Num = DoubleNum(math.tan(n.getDoubleVal))
-  def log(n: List[Object]): Num = DoubleNum(math.log(n.getDoubleVal))
-  def sqrt(n: List[Object]): Num = DoubleNum(math.sqrt(n.getDoubleVal))
+  def cos(n: List[Object]): Num = DoubleNum(math.cos(n.getDoubleVal doubleValue))
+  def sin(n: List[Object]): Num = DoubleNum(math.sin(n.getDoubleVal doubleValue))
+  def tan(n: List[Object]): Num = DoubleNum(math.tan(n.getDoubleVal doubleValue))
+  def log(n: List[Object]): Num = DoubleNum(math.log(n.getDoubleVal doubleValue))
+  def sqrt(n: List[Object]): Num = DoubleNum(math.sqrt(n.getDoubleVal doubleValue))
 
-  def intPow(x: Int, n: Int): Int = n match {
+  def intPow(x: BigInt, n: BigInt): BigInt = n match {
       case n if n <= 0 => 1
       case n if n % 2 == 0 => val tmp = intPow(x, n / 2); tmp * tmp
       case n if n % 2 == 1 => x * intPow(x, n - 1)

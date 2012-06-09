@@ -22,7 +22,7 @@ case object NewLine extends Token
  * Contains a list of the keywords
  */
 object Lexer {
-  val KeyWords = List("fun", "end", "for")
+  val KeyWords = List("fun", "end", "if", "print")
 }
 
 /**

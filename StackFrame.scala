@@ -51,7 +51,7 @@ object StackFrame {
   /**
    * Creates a new stack frame
    */
-  def startNewFrame = new StackFrame
+  def startNewFrame = stack push(new StackFrame)
   /**
    * Pushes the given stack frame on the stack
    * @param stackFrame the stack frame to push

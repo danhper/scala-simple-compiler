@@ -97,12 +97,25 @@ class Parser(lexer: Lexer) {
   def parseStatement: Stmt = token match {
     case KeyWord(s) => s match {
       case "fun" => advance; parseFunctionDef
+      case "print" => advance; parsePrint
 //      case "if" => advance; parseIf
       case _ => error("Wrong keyword " + s)
     }
     case _ =>  {
       ExprStmt(parseExpression)
     }
+  }
+
+  /**
+   * Parses a print statement of the form
+   * print(exp)
+   * @return Stmt
+   */
+  def parsePrint: Stmt = {
+    eat(One('('))
+    val stmt = PrintStmt(parseExpression)
+    eat(One(')'))
+    stmt
   }
 
   /**

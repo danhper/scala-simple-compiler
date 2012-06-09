@@ -68,6 +68,16 @@ case class IfStmt(cond: Condition, stmts: StmtList, elif: List[IfStmt], els: Opt
 }
 
 /**
+ * Represents a statement to print a value
+ */
+case class PrintStmt(exp: Exp) extends Stmt {
+  def execute = {
+    println(exp.eval)
+    Null
+  }
+}
+
+/**
  * Represents an empty statement (eg: a lineskip)
  */
 case object EmptyStmt extends Stmt {

@@ -95,7 +95,7 @@ object BuiltinFunctions {
       val q = 1.0 / (2 * k + 1)
       n +=  p * q
     }
-    2 * n
+    n * 2
   }
 
   def doublePow(x: BigDecimal, n: BigDecimal) = exp(n * ln(x))

@@ -1,6 +1,6 @@
 object Expression {
   import Operator._
-  import Function._
+  import BuiltinFunctions._
 
   class EvalException(s: String) extends Exception {
     def printError = println(s)
@@ -10,9 +10,9 @@ object Expression {
   def makeBinaryApp(f: Op, left: Exp, right: Exp): Exp = App(f, left, Some(right))
 
   object T {
-    var table = new collection.mutable.HashMap[Var, Num]
-    def addVar(key: Var, v: Num) = (table += ((key, v)))
-    def addVar(key: String, v: Num) = (table += ((Var(key), v)))
+    var table = new collection.mutable.HashMap[Var, Object]
+    def addVar(key: Var, v: Object) = (table += ((key, v)))
+    def addVar(key: String, v: Object) = (table += ((Var(key), v)))
     var lastInput: Exp = IntNum(0)
   }
 
@@ -22,7 +22,7 @@ object Expression {
   }
 
   abstract class Exp {
-    def eval: Num
+    def eval: Object
     def +(other: Exp): Exp = makeBinaryApp(Add, this, other)
     def -(other: Exp): Exp = makeBinaryApp(Sub, this, other)
     def *(other: Exp): Exp = makeBinaryApp(Mul, this, other)
@@ -31,39 +31,20 @@ object Expression {
     def unary_- = makeUnaryApp(UnarySub, this)
   }
 
-  abstract class Num extends Exp {
-    def eval = this
-    def getDoubleVal: Double
-  }
-
-  case class FunCall(funcName: String, params: List[Exp]) extends Exp {
+  case class FunCall(funcName: Var, params: List[Exp]) extends Exp {
     def eval = {
-      val value = BuiltIns.table get(funcName) match {
-        case Some(f) => f.execute(params)
-        case _ => throw new EvalException("function not found")
+      val value = StackFrame.getValue(funcName) match {
+        case f: Fun => f.execute(params)
+        case _ => throw new EvalException(funcName + " is not callable")
       }
       value
     }
   }
 
-  case class IntNum(n: Int) extends Num {
-    override def toString = n toString
-    def getVal: Int = n
-    def getDoubleVal = n
-  }
-
-  case class DoubleNum(n: Double) extends Num {
-    override def toString = n toString
-    def getVal: Double = n
-    def getDoubleVal = n
-  }
-
   case class Var(s: String) extends Exp {
+    override def toString = s
     def :=(other: Exp): Exp = makeBinaryApp(DefVar, this, other)
-    def eval = T.table get(this) match {
-      case None => throw new EvalException("Variable " + this.s + " is missing.")
-      case Some(n) => n
-    }
+    def eval = StackFrame.getValue(this)
   }
 
   case class App(fun: Op, left: Exp, right: Option[Exp]) extends Exp {

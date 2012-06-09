@@ -8,7 +8,8 @@ object Main {
   
 
   def main(args: Array[String]) = {
-    builtInFuncList.foreach(fun => BuiltIns.addBuiltin(fun.name, fun))
+    StackFrame.startNewFrame
+    builtInFuncList.foreach(fun => StackFrame.addValue(fun.name, fun))
     prompt
   }
 
@@ -20,18 +21,17 @@ object Main {
     while(running) {
       try {
         val stmt = parser.interactiveParse
-        stmt match {
-          case ExprStmt(exp) => println(exp.eval)
-          case EmptyStmt => ()
-          case FuncDef(name, varList, stmts) => println(name + ' ' + varList + ' ' + stmts)
-          case _ => ()
+        var obj = stmt.execute
+        obj match {
+          case Null => ()
+          case _ => println(obj)
         }
-
       } catch {
         case e: ParseException => e.printError
         case e: ArithmeticException => println("division by 0")
         case e: BadTokenException => e.printError
         case e: EvalException => e.printError
+        case e: UndefinedException => e.printError
         case e: NumberFormatException => println("overflow")
         case e: EofException => running = false
         case e => e.printStackTrace

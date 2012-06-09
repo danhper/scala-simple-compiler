@@ -55,7 +55,7 @@ object Parser {
           }
         }
       }
-      parseAll(List())
+      parseAll(Nil)
     }
 
     def parseStatement: Stmt = token match {
@@ -148,7 +148,7 @@ object Parser {
       case Op("-") => advance; -parseFactor
       case Id(s) => advance; token match {
         case Op("=") => advance; Var(s) := parseExpression
-        case One('(') => FunCall(s, parseParameters)
+        case One('(') => FunCall(Var(s), parseParameters)
         case _ => Var(s)
       }
       case One('%') => advance; T.lastInput

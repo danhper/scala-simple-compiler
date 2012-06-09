@@ -97,6 +97,7 @@ class Parser(lexer: Lexer) {
   def parseStatement: Stmt = token match {
     case KeyWord(s) => s match {
       case "fun" => advance; parseFunctionDef
+//      case "if" => advance; parseIf
       case _ => error("Wrong keyword " + s)
     }
     case _ =>  {

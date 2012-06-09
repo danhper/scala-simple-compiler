@@ -45,6 +45,28 @@ case class StmtList(stmtList: List[Stmt]) extends Stmt {
   def isEmpty = stmtList isEmpty
 }
 
+case class IfStmt(cond: Condition, stmts: StmtList, elif: List[IfStmt], els: Option[StmtList]) extends Stmt {
+  def execute = {
+    if(cond.eval == True) { 
+      stmts execute
+    } else {
+      def process(li: List[IfStmt]): Object = li match {
+        case Nil => els match {
+          case None => Null
+          case Some(stmts) => stmts.execute
+        }
+        case x::xs => {
+         if(x.cond.eval == True)
+           x.stmts.execute 
+         else 
+           process(xs)
+        }
+      }
+      process(elif)
+    }
+  }
+}
+
 /**
  * Represents an empty statement (eg: a lineskip)
  */

@@ -5,30 +5,33 @@ import BuiltinFunctions._
  */
 abstract class Object extends Exp
 
+abstract class Value extends Object {
+  def eval = this
+}
+
 /**
  * Represents a number (integer or double)
  */
-abstract class Num extends Object {
-  def eval = this
+abstract class Num extends Value {
   def getDoubleVal: BigDecimal
   /**
-   * Overloading of operators to get a double value
+   * Overloading of operator to get a double value
    */
   def +(that: Num): DoubleNum = DoubleNum(this.getDoubleVal + that.getDoubleVal)
   /**
-   * Overloading of operators to get a double value
+   * Overloading of operator to get a double value
    */
   def -(that: Num): DoubleNum = DoubleNum(this.getDoubleVal - that.getDoubleVal)
   /**
-   * Overloading of operators to get a double value
+   * Overloading of operator to get a double value
    */
   def *(that: Num): DoubleNum = DoubleNum(this.getDoubleVal * that.getDoubleVal)
   /**
-   * Overloading of operators to get a double value
+   * Overloading of operator to get a double value
    */
   def /(that: Num): DoubleNum = DoubleNum(this.getDoubleVal / that.getDoubleVal)
   /**
-   * Overloading of operators to get a double value
+   * Overloading of operator to get a double value
    */
   def **(that: Num): DoubleNum = DoubleNum(doublePow(this.getDoubleVal, that.getDoubleVal))
 }
@@ -122,6 +125,11 @@ case class DeclaredFunction(name: String, varList: List[Var], stmts: StmtList) e
     ret    
   }
 }
+
+abstract class Bool extends Value
+
+case object True extends Bool
+case object False extends Bool
 
 /**
  * Represents a null value

@@ -1,4 +1,3 @@
-
 /**
  * Companion object of the stack frame
  * Contains the program stack and methods to act on it
@@ -19,6 +18,10 @@ object StackFrame {
     frame
   }
 
+  /**
+   * Returns the current stack frame
+   * @return StackFrame
+   */
   def getCurrentFrame: StackFrame = stack.head
 
   /**
@@ -28,6 +31,7 @@ object StackFrame {
    */
   def addValue(key: Var, v: Object): Unit = stack.head addVal(key, v)
   def addValue(key: String, v: Object): Unit = stack.head addVal(key, v)
+
   /**
    * Returns the value corresponding to the key if it exists
    * @param key the value name
@@ -47,9 +51,14 @@ object StackFrame {
   /**
    * Creates a new stack frame
    */
+  def startNewFrame(stackFrame: StackFrame) = new StackFrame
+  /**
+   * Pushes the given stack frame on the stack
+   * @param stackFrame the stack frame to push
+   */
   def startNewFrame(stackFrame: StackFrame) = stack push(stackFrame)
   /**
-   * Deletes the last stack frame
+   * Pops the last stack frame
    */
   def stopFrame = stack pop
 }

@@ -2,7 +2,7 @@ object Main {
   import BuiltinFunctions._
 
   def main(args: Array[String]) = {
-    StackFrame.startNewFrame(new StackFrame)
+    StackFrame.startNewFrame
     builtInFuncList.foreach(fun => StackFrame.addValue(fun.name, fun))
     prompt
   }

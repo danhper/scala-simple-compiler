@@ -30,7 +30,7 @@ abstract class Num extends Object {
   /**
    * Overloading of operators to get a double value
    */
-  def **(that: Num): DoubleNum = DoubleNum(math.pow(this.getDoubleVal doubleValue, that.getDoubleVal doubleValue))
+  def **(that: Num): DoubleNum = DoubleNum(doublePow(this.getDoubleVal, that.getDoubleVal))
 }
 
 /**
@@ -58,7 +58,7 @@ case class IntNum(n: BigInt) extends Num {
   /**
    * Overloading of operator to get an integer
    */
-  def **(that: IntNum): IntNum = IntNum(intPow(this.n, that.n))
+  def **(that: IntNum): IntNum = IntNum(intPow(this.n, that.n) toBigInt)
   def getVal: BigInt = n
   def getDoubleVal = BigDecimal(n)
 }

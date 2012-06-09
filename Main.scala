@@ -26,7 +26,7 @@ object Main {
       } catch {
         case e: Printable => e.printError
         case e: ArithmeticException => println("division by 0")
-        case e: NumberFormatException => println("overflow")
+        case e: NumberFormatException => println("overflow"); e.printStackTrace
         case e: EofException => running = false
         case e => e.printStackTrace
       } finally {

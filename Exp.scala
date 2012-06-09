@@ -94,5 +94,5 @@ case class App(fun: Operator, exp: Exp, other: Option[Exp]) extends Exp {
 }
 
 case class Condition(fun: Operator, exp: Exp, other: Option[Exp]) extends Exp {
-  def eval = 
+  def eval = True
 }

@@ -46,12 +46,13 @@ object Main {
   }
 
   def readFile(fileName: String) = {
-    val inputStream = io.Source.fromFile(fileName).buffered    
-    val parser = new Parser(new Lexer(inputStream))
     try {
+      val inputStream = io.Source.fromFile(fileName).buffered    
+      val parser = new Parser(new Lexer(inputStream))
       val stmts = parser.parseFile
       stmts execute
     } catch {
+      case e: java.io.FileNotFoundException => println("Could not find file " + fileName)
       case e: Printable => e.printError
       case e: ArithmeticException => println("division by 0")
       case e: NumberFormatException => println("overflow"); e.printStackTrace

@@ -83,7 +83,7 @@ class Lexer(buffer: BufferedIterator[Char]) {
       }
     }
   }
-
+  
   /**
    * Skips white spaces to get to the next token and returns it
    * @return Token
@@ -91,7 +91,13 @@ class Lexer(buffer: BufferedIterator[Char]) {
   def getToken: Token = nativeToken match {
     case One(' ') | One('\t') => getToken
     case One('\n') => NewLine
+    case One('#') => skipLine
     case token => token
+  }
+
+  def skipLine: Token = nativeToken match {
+    case One('\n') => NewLine
+    case _ => skipLine
   }
 
   /**

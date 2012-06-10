@@ -105,7 +105,8 @@ class Parser(lexer: Lexer) {
         case _ => {
           val stmt = parseStatement
           printIndent
-          eat(NewLine)
+          if(token != Eof)
+            eat(NewLine)
           parseAll(stmts :+ stmt)
         }
       }

@@ -80,7 +80,7 @@ object BuiltinFunctions {
 
   def exp(x: BigDecimal) = {
     var n: BigDecimal = BigDecimal(0)
-    for(k <- 0 to 500) {
+    for(k <- 0 to 100) {
       n += intPow(x, k) / fact(k)
     }
     n
@@ -90,7 +90,7 @@ object BuiltinFunctions {
 
   def ln(x: BigDecimal) = {
     var n: BigDecimal = BigDecimal(0)
-    for(k <- 0 to 500) {
+    for(k <- 0 to 200) {
       val p = intPow((x - 1) / (x + 1), 2 * k + 1)
       val q = 1.0 / (2 * k + 1)
       n +=  p * q
@@ -113,8 +113,8 @@ object BuiltinFunctions {
   val ceilFun = BuiltInFun("ceil", 1, ceil)
   val roundFun = BuiltInFun("round", 1, round)
 
-  val builtInFuncList = List(cosFun, sinFun, tanFun, expFun,
+  /*val builtInFuncList = List(cosFun, sinFun, tanFun, expFun,
                              logFun, sqrtFun, factFun, lnFun,
-                             absFun, floorFun, ceilFun, roundFun)
-
+                             absFun, floorFun, ceilFun, roundFun)*/
+  val builtInFuncList = List(ceilFun, roundFun, floorFun)
 }

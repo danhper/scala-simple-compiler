@@ -113,6 +113,8 @@ class Parser(lexer: Lexer) {
       case "fun" => advance; parseFunctionDef
       case "print" => advance; parsePrint
       case "if" => advance; parseIf
+      case "for" => advance; parseFor
+      case "while" => advance; parseWhile
       case _ => error("Wrong keyword " + s)
     }
     case Id(s) => lookAhead match {
@@ -125,6 +127,51 @@ class Parser(lexer: Lexer) {
     case _ => ExprStmt(parseExpressionOrTest)
   }
 
+  /**
+   * Parses a while statement of the form
+   * while `test`:
+   * stmts
+   * end
+   *
+   * @return Stmt
+   */
+  def parseWhile: Stmt = {
+    val cond = parseOrTest(None)
+    val stmts = parseBlock(false)
+    WhileStmt(cond, stmts)
+  }
+
+  /**
+   * Parses a for statement of the form
+   * for `var` in `exp` to `exp`:
+   *    stmts
+   * end
+   * @return Stmt
+   */
+  def parseFor: Stmt = {
+    val variable = parseExpression match {
+      case v: Var => v
+      case _ => error("Expected a variable")
+    }
+    eat(KeyWord("in"))
+    val start = parseExpression
+    eat(KeyWord("to"))
+    val end = parseExpression
+    val stmts = parseBlock(false)
+    ForStmt(variable, start, end, stmts)    
+  }
+
+  /**
+   * Parses an if statement of the form
+   * if test:
+   * stmts
+   * (elif test:
+   * stmts)*
+   * (else:
+   * stmts)?
+   * 
+   * @return Stmt
+   */
   def parseIf: Stmt =  {
     def parseElif(ifs: List[IfStmt]): List[IfStmt] = token match {
       case KeyWord("elif") => {
@@ -200,14 +247,16 @@ class Parser(lexer: Lexer) {
    * @return StmtList the statements in the block
    */
   def parseBlock(isIf: Boolean): StmtList = {
-    indentDepth += 3
+    if(!isIf)
+      indentDepth += 3
     eat(One(':'))
     printIndent
     eat(NewLine)
     val stmts = parseStatements
-    indentDepth -= 3
-    if(!isIf)
+    if(!isIf) {
+      indentDepth -= 3
       eat(KeyWord("end"))
+    }
     stmts
   }
 
@@ -312,6 +361,7 @@ class Parser(lexer: Lexer) {
       eat(One(')')); exp
     }
     case Op("+") => advance; parseFactor
+    case StrTok(s) => advance; Str(s)
     case Op("-") => advance; -parseFactor
     case Id(s) => advance; token match {
       case One('(') => FunCall(Var(s), parseParameters)
@@ -325,6 +375,12 @@ class Parser(lexer: Lexer) {
     case _ => error("missing operand at token " + token)
   }
 
+  /**
+   * Parses a test of the form
+   * test (|| test)*
+   * where test is an expression or a comparison
+   * @return Exp
+   */
   def parseOrTest(e: Option[Exp]): Exp =  {
     def parseRightTest(exp: Exp): Exp = token match {
       case LogicOp("||") => {
@@ -336,6 +392,11 @@ class Parser(lexer: Lexer) {
     parseRightTest(parseAndTest(e))
   }
 
+  /**
+   * Parses a test of the form
+   * test (&& test)*
+   * @return Exp
+   */
   def parseAndTest(e: Option[Exp]): Exp =  {
     def parseRightTest(exp: Exp): Exp = token match {
       case LogicOp("&&") => advance; parseRightTest(LogicExp(And, exp, Some(parseNotTest(None))))
@@ -344,11 +405,23 @@ class Parser(lexer: Lexer) {
     parseRightTest(parseNotTest(e))
   }
 
+  /**
+   * Parses a test of the form
+   * !test
+   * or simply
+   * test
+   * @return Exp
+   */
   def parseNotTest(e: Option[Exp]): Exp = token match {
     case LogicOp("!") => advance; LogicExp(Not, parseCompTest(e), None)
     case _ => parseCompTest(e)
   }
 
+  /**
+   * Parses a comparison of the form
+   * exp ((== | != | < | <= | > | >=) exp)*
+   * @return Exp
+   */
   def parseCompTest(e: Option[Exp]): Exp = {
     def parseRightTest(exp: Exp): Exp = token match {
       case CompOp(s) => {

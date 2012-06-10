@@ -75,6 +75,33 @@ case class IfStmt(cond: Exp, stmts: StmtList, elif: List[IfStmt], els: Option[St
   }
 }
 
+case class ForStmt(v: Var, start: Exp, end: Exp, stmts: StmtList) extends Stmt {
+  def execute = {
+    val startVal = start eval match {
+      case IntNum(n) => n
+      case _ => throw new EvalException("Needs an integer")
+    }
+    val endVal = end eval match {
+      case IntNum(n) => n
+      case _ => throw new EvalException("Needs an integer")
+    }
+    for(i <- startVal to endVal) {
+      StackFrame.addValue(v, IntNum(i))
+      stmts execute
+    }
+    Null
+  }
+}
+
+case class WhileStmt(cond: Exp, stmts: StmtList) extends Stmt {
+  def execute = {
+    while(cond.eval == True) {
+      stmts.execute
+    }
+    Null
+  }
+}
+
 /**
  * Represents a statement to print a value
  */

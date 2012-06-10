@@ -6,6 +6,8 @@ case class IntTok(v: BigInt) extends Token
 case class DoubleTok(v: BigDecimal) extends Token
 /** Represents an identifier */
 case class Id(s: String) extends Token
+/** Represents a string */
+case class StrTok(s: String) extends Token
 /** Represents an operator */
 case class Op(s: String) extends Token
 /** Represents an assignment operator */
@@ -28,7 +30,7 @@ case object NewLine extends Token
  * Contains a list of the keywords
  */
 object Lexer {
-  val KeyWords = List("fun", "end", "if", "print", "elif", "else")
+  val KeyWords = List("fun", "end", "if", "print", "elif", "else", "for", "in", "to", "while")
   val operators = "-+*/%^"
   val logicOperators = "!&|"
   val compOperators = "<>=!"
@@ -105,6 +107,13 @@ class Lexer(buffer: BufferedIterator[Char]) {
     }
   }
 
+  /**
+   * Checks for the next char after the given one
+   * and returns the appropriate token
+   * (normal or assignment operator )
+   * @param c the previous char
+   * @return Token
+   */
   def getOperator(c: Char): Token = lookAhead match {
     case None => Op(c toString)
     case Some(x) => x match {
@@ -114,7 +123,14 @@ class Lexer(buffer: BufferedIterator[Char]) {
       case _ => Op(c toString)
     }
   }
-
+  
+  /**
+   * Checks for the next operator and returns
+   * the appropriate logic, assignment or comparison
+   * operator
+   * @param c the previous char
+   * @return Token
+   */
   def getCompOperator(c: Char): Token = lookAhead match {
     case None => CompOp(c toString)
     case Some(x) => x match {
@@ -127,6 +143,12 @@ class Lexer(buffer: BufferedIterator[Char]) {
     }
   }
 
+  /**
+   * Gets the logic operator (!, &&, ||) or throws
+   * an exception if could not find it
+   * @throws BadTokenException
+   * @return Token
+   */
   def getLogicOperator(c: Char): Token = lookAhead match {
     case None => throw new BadTokenException("Bad token " + c)
     case Some(x) => (c, x) match {
@@ -135,6 +157,23 @@ class Lexer(buffer: BufferedIterator[Char]) {
       case ('|', '|') => advance; LogicOp("||")
       case n => throw new BadTokenException("Bad token " + c + n)
     }
+  }
+
+  /**
+   * Parses a string ended with the char `c`
+   * TODO: support for escape character
+   * @return Token
+   */
+  def parseString(c: Char): Token = {
+    def getString(s: String): String = lookAhead match {
+      case None => throw new BadTokenException("Unclosed string")
+      case Some(x) => x match {
+        case '\n' => advance; throw new BadTokenException("Unclosed string")
+        case x if c == x => advance; s
+        case _ => advance; getString(s + x)
+      }
+    }
+    StrTok(getString(""))
   }
   
   /**
@@ -149,6 +188,7 @@ class Lexer(buffer: BufferedIterator[Char]) {
       case c if Lexer.isOperator(c) => advance; getOperator(c)
       case c if Lexer.isCompOperator(c) => advance; getCompOperator(c)
       case c if Lexer.isLogicOperator(c) => advance; getLogicOperator(c)
+      case '\'' | '"' => advance; parseString(c)
       case _ => advance; One(c)
     }
   }

@@ -46,6 +46,12 @@ case object Add extends Binary {
     case (i: IntNum, j: IntNum) => i + j
     case _ => a + b
   }
+  override def f(a: Object, b: Object): Object = (a,b) match {
+    case (i: Num, j: Num) => this.f(i, j)
+    case (_, Str(s)) => Str(a + s)
+    case (Str(s), _) => Str(s + b)
+    case _ => throw new TypeException(a, Some(b))
+  }
   def f(exp1: Exp, exp2: Exp) = exp1 + exp2
 }
 

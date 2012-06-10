@@ -138,6 +138,10 @@ case class DeclaredFunction(name: String, varList: List[Var], stmts: StmtList) e
   }
 }
 
+case class Str(s: String) extends Value {
+  override def toString = s
+}
+
 abstract class Bool extends Value {
   def ||(that: Bool) = Or.fun(this, that)
   def &&(that: Bool) = And.fun(this, that)

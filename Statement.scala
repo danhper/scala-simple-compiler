@@ -43,12 +43,16 @@ case class AssignStmt(v: Var, exp: Exp) extends Stmt {
  */
 case class StmtList(stmtList: List[Stmt]) extends Stmt {
   def execute = {
+    val (imports, all) = stmtList.partition(_.isInstanceOf[ImportStmt])
+    val (funcs, others) = all.partition(_.isInstanceOf[FuncDef])
+    imports foreach(_ execute)
+    funcs foreach(_ execute)
     def exec(stmtList: List[Stmt]): Object = stmtList match {
       case Nil => Null
       case head::Nil => head execute
       case head::tail => head execute; exec(tail)
     }
-    exec(stmtList)
+    exec(others)
   }
   def isEmpty = stmtList isEmpty
 }
@@ -108,6 +112,13 @@ case class WhileStmt(cond: Exp, stmts: StmtList) extends Stmt {
 case class PrintStmt(exp: Exp) extends Stmt {
   def execute = {
     println(exp.eval)
+    Null
+  }
+}
+
+case class ImportStmt(fileName: String) extends Stmt {
+  def execute = {
+    Main.readFile(fileName)
     Null
   }
 }

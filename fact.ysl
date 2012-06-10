@@ -1,0 +1,8 @@
+fun myfact(n):
+    res = 1
+    for i in 2 to n:
+        res *= i
+    end
+    res
+end
+    

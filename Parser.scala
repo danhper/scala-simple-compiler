@@ -47,6 +47,15 @@ class Parser(lexer: Lexer) {
     throw new ParseException(s)
   }
 
+  def parseFile: StmtList = {
+    advance
+    val stmts = parseStatements
+    token match {
+      case Eof => stmts
+      case _ => error("Unexpected token " + token)
+    }
+  }
+
   /**
    * Parses a statement in interactive mode
    * @throws EofException
@@ -115,6 +124,7 @@ class Parser(lexer: Lexer) {
       case "if" => advance; parseIf
       case "for" => advance; parseFor
       case "while" => advance; parseWhile
+      case "import" => advance; parseImport
       case _ => error("Wrong keyword " + s)
     }
     case Id(s) => lookAhead match {
@@ -125,6 +135,13 @@ class Parser(lexer: Lexer) {
       case _ => ExprStmt(parseExpressionOrTest)
     }
     case _ => ExprStmt(parseExpressionOrTest)
+  }
+
+  def parseImport: Stmt = {
+    token match {
+      case StrTok(fileName) => advance; ImportStmt(fileName)
+      case _ => error("Missing filename after import")
+    }
   }
 
   /**

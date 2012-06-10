@@ -30,7 +30,7 @@ case object NewLine extends Token
  * Contains a list of the keywords
  */
 object Lexer {
-  val KeyWords = List("fun", "end", "if", "print", "elif", "else", "for", "in", "to", "while")
+  val KeyWords = List("fun", "end", "if", "print", "elif", "else", "for", "in", "to", "while", "import")
   val operators = "-+*/%^"
   val logicOperators = "!&|"
   val compOperators = "<>=!"

@@ -9,7 +9,8 @@ SCFLAGS = -cp $(OUT) -d $(OUT)
 SD = scaladoc
 SDFLAGS = -d $(DOC)
 
-all: 
+all:
+	@test -d $(OUT) || mkdir $(OUT) 
 	@echo "Compiling scala files"
 	@$(SC) $(SCFLAGS) $(SOURCES)
 

@@ -13,6 +13,7 @@ object CompOperator {
     case n: IntNum => n.getVal != 0
     case n: DoubleNum => n.getVal != 0
     case Null => False
+    case b: Bool => b
     case f: Fun => throw new TypeException(f)
     case _ => throw new EvalException("Unknown type " + o)
   }

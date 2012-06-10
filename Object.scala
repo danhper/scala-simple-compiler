@@ -127,10 +127,10 @@ case class DeclaredFunction(name: String, varList: List[Var], stmts: StmtList) e
     "function: " + name + "(" + 
       (varList map (_ toString) reduceRight(_ + ", " + _)) +  ")"
   }
-  val stackFrame = StackFrame(StackFrame.getCurrentFrame)
+  //val stackFrame = StackFrame(StackFrame.getCurrentFrame)
   def execute(params: List[Exp]) = {
     checkParamsNum(params)
-    StackFrame.startNewFrame(stackFrame)
+    StackFrame.startNewFrame(new StackFrame)
     varList zip(params) foreach {case (v, exp) => StackFrame.addValue(v, exp eval)}
     val ret = stmts.execute
     StackFrame.stopFrame

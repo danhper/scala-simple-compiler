@@ -120,23 +120,23 @@ class Parser(lexer: Lexer) {
         advance; advance
         parseAssign(s, a)
       }
-      case _ => ExprStmt(parseExpression)
+      case _ => ExprStmt(parseExpressionOrTest)
     }
-    case _ => ExprStmt(parseExpression)
+    case _ => ExprStmt(parseExpressionOrTest)
   }
 
   def parseIf: Stmt =  {
     def parseElif(ifs: List[IfStmt]): List[IfStmt] = token match {
       case KeyWord("elif") => {
         advance
-        val cond = parseOrTest
+        val cond = parseOrTest(None)
         val stmts = parseBlock(true)
         parseElif(ifs :+ IfStmt(cond, stmts, Nil, None))
       }
       case _ => ifs
     }
 
-    val cond = parseOrTest
+    val cond = parseOrTest(None)
     val stmts = parseBlock(true)
     val ifs = parseElif(Nil)
     val elseStmt = token match {
@@ -242,6 +242,10 @@ class Parser(lexer: Lexer) {
     }
   }
 
+  def parseExpressionOrTest: Exp = {
+    parseOrTest(None)
+  }
+
   /**
    * Parses an expression of the form
    * term (+ expression)*
@@ -304,7 +308,7 @@ class Parser(lexer: Lexer) {
     case DoubleTok(n) => advance; DoubleNum(n)
     case One('(') => {
       advance
-      val exp = parseExpression
+      val exp = parseExpressionOrTest
       eat(One(')')); exp
     }
     case Op("+") => advance; parseFactor
@@ -321,28 +325,31 @@ class Parser(lexer: Lexer) {
     case _ => error("missing operand at token " + token)
   }
 
-  def parseOrTest: Exp =  {
+  def parseOrTest(e: Option[Exp]): Exp =  {
     def parseRightTest(exp: Exp): Exp = token match {
-      case LogicOp("||") => advance; parseRightTest(LogicExp(Or, exp, Some(parseAndTest)))
+      case LogicOp("||") => {
+        advance 
+        parseRightTest(LogicExp(Or, exp, Some(parseAndTest(None))))
+      }
       case _ => exp
     }
-    parseRightTest(parseAndTest)
+    parseRightTest(parseAndTest(e))
   }
 
-  def parseAndTest: Exp =  {
+  def parseAndTest(e: Option[Exp]): Exp =  {
     def parseRightTest(exp: Exp): Exp = token match {
-      case LogicOp("&&") => advance; parseRightTest(LogicExp(And, exp, Some(parseNotTest)))
+      case LogicOp("&&") => advance; parseRightTest(LogicExp(And, exp, Some(parseNotTest(None))))
       case _ => exp
     }
-    parseRightTest(parseNotTest)
+    parseRightTest(parseNotTest(e))
   }
 
-  def parseNotTest: Exp = token match {
-    case LogicOp("!") => advance; LogicExp(Not, parseCompTest, None)
-    case _ => parseCompTest
+  def parseNotTest(e: Option[Exp]): Exp = token match {
+    case LogicOp("!") => advance; LogicExp(Not, parseCompTest(e), None)
+    case _ => parseCompTest(e)
   }
 
-  def parseCompTest: Exp = {
+  def parseCompTest(e: Option[Exp]): Exp = {
     def parseRightTest(exp: Exp): Exp = token match {
       case CompOp(s) => {
         advance
@@ -359,7 +366,10 @@ class Parser(lexer: Lexer) {
       }
       case _ => exp
     }
-    parseRightTest(parseExpression)
+    e match {
+      case Some(n) => parseRightTest(n)
+      case None => parseRightTest(parseExpression)
+    }
   }
 }
 

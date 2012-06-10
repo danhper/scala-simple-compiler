@@ -60,6 +60,30 @@
       </span>
       </h4>
       <p class="comment cmt">Represents an application of an operator and one or two operands</p>
+    </li><li visbl="pub" name="_root_.AssignOp" data-isabs="false">
+      <a id="AssignOp:AssignOp"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="AssignOp.html"><span class="name">AssignOp</span></a><span class="params">(<span name="s">s: String</span>)</span><span class="result"> extends Token with Product with Serializable</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Represents an assignment operator</p>
+    </li><li visbl="pub" name="_root_.AssignStmt" data-isabs="false">
+      <a id="AssignStmt:AssignStmt"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="AssignStmt.html"><span class="name">AssignStmt</span></a><span class="params">(<span name="v">v: Var</span>, <span name="exp">exp: Exp</span>)</span><span class="result"> extends Stmt with Product with Serializable</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="_root_.BadTokenException" data-isabs="false">
       <a id="BadTokenException:BadTokenException"></a>
       <h4 class="signature">
@@ -86,6 +110,18 @@
       </h4>
       <p class="comment cmt">Represents a binary operator
 </p>
+    </li><li visbl="pub" name="_root_.Bool" data-isabs="true">
+      <a id="Bool:Bool"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Bool.html"><span class="name">Bool</span></a><span class="result"> extends Value</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="_root_.BuiltInFun" data-isabs="false">
       <a id="BuiltInFun:BuiltInFun"></a>
       <h4 class="signature">
@@ -111,6 +147,30 @@
       </h4>
       <p class="comment cmt">General exception for calculations problem (eg: fact(-5))
 </p>
+    </li><li visbl="pub" name="_root_.CompOp" data-isabs="false">
+      <a id="CompOp:CompOp"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="CompOp.html"><span class="name">CompOp</span></a><span class="params">(<span name="s">s: String</span>)</span><span class="result"> extends Token with Product with Serializable</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Represents a comparison operator</p>
+    </li><li visbl="pub" name="_root_.CompOperator" data-isabs="true">
+      <a id="CompOperator:CompOperator"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="CompOperator.html"><span class="name">CompOperator</span></a><span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="_root_.DeclaredFunction" data-isabs="false">
       <a id="DeclaredFunction:DeclaredFunction"></a>
       <h4 class="signature">
@@ -131,7 +191,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="DoubleNum.html"><span class="name">DoubleNum</span></a><span class="params">(<span name="n">n: Double</span>)</span><span class="result"> extends Num with Product with Serializable</span>
+        <a href="DoubleNum.html"><span class="name">DoubleNum</span></a><span class="params">(<span name="n">n: BigDecimal</span>)</span><span class="result"> extends Num with Product with Serializable</span>
       </span>
       </h4>
       <p class="comment cmt">Represents a double</p>
@@ -143,7 +203,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="DoubleTok.html"><span class="name">DoubleTok</span></a><span class="params">(<span name="v">v: Double</span>)</span><span class="result"> extends Token with Product with Serializable</span>
+        <a href="DoubleTok.html"><span class="name">DoubleTok</span></a><span class="params">(<span name="v">v: BigDecimal</span>)</span><span class="result"> extends Token with Product with Serializable</span>
       </span>
       </h4>
       <p class="comment cmt">Represents a floating number</p>
@@ -200,6 +260,18 @@ Contains operators overloading and abstract evaluation method
       </h4>
       <p class="comment cmt">Represents a statement containing an simple expression
 </p>
+    </li><li visbl="pub" name="_root_.ForStmt" data-isabs="false">
+      <a id="ForStmt:ForStmt"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="ForStmt.html"><span class="name">ForStmt</span></a><span class="params">(<span name="v">v: Var</span>, <span name="start">start: Exp</span>, <span name="end">end: Exp</span>, <span name="stmts">stmts: StmtList</span>)</span><span class="result"> extends Stmt with Product with Serializable</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="_root_.Fun" data-isabs="true">
       <a id="Fun:Fun"></a>
       <h4 class="signature">
@@ -248,6 +320,30 @@ Contains operators overloading and abstract evaluation method
       </span>
       </h4>
       <p class="comment cmt">Represents an identifier</p>
+    </li><li visbl="pub" name="_root_.IfStmt" data-isabs="false">
+      <a id="IfStmt:IfStmt"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="IfStmt.html"><span class="name">IfStmt</span></a><span class="params">(<span name="cond">cond: Exp</span>, <span name="stmts">stmts: StmtList</span>, <span name="elif">elif: List[IfStmt]</span>, <span name="els">els: Option[StmtList]</span>)</span><span class="result"> extends Stmt with Product with Serializable</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="_root_.ImportStmt" data-isabs="false">
+      <a id="ImportStmt:ImportStmt"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="ImportStmt.html"><span class="name">ImportStmt</span></a><span class="params">(<span name="fileName">fileName: String</span>)</span><span class="result"> extends Stmt with Product with Serializable</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="_root_.IntNum" data-isabs="false">
       <a id="IntNum:IntNum"></a>
       <h4 class="signature">
@@ -256,7 +352,7 @@ Contains operators overloading and abstract evaluation method
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="IntNum.html"><span class="name">IntNum</span></a><span class="params">(<span name="n">n: Int</span>)</span><span class="result"> extends Num with Product with Serializable</span>
+        <a href="IntNum.html"><span class="name">IntNum</span></a><span class="params">(<span name="n">n: BigInt</span>)</span><span class="result"> extends Num with Product with Serializable</span>
       </span>
       </h4>
       <p class="comment cmt">Represents an integer</p>
@@ -268,7 +364,7 @@ Contains operators overloading and abstract evaluation method
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="IntTok.html"><span class="name">IntTok</span></a><span class="params">(<span name="v">v: Int</span>)</span><span class="result"> extends Token with Product with Serializable</span>
+        <a href="IntTok.html"><span class="name">IntTok</span></a><span class="params">(<span name="v">v: BigInt</span>)</span><span class="result"> extends Token with Product with Serializable</span>
       </span>
       </h4>
       <p class="comment cmt">Represents an integer</p>
@@ -296,6 +392,42 @@ Contains operators overloading and abstract evaluation method
       </span>
       </h4>
       <p class="comment cmt">Reads a stream from a scala.collection.BuferedIterator and divides it into tokens</p>
+    </li><li visbl="pub" name="_root_.LogicExp" data-isabs="false">
+      <a id="LogicExp:LogicExp"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="LogicExp.html"><span class="name">LogicExp</span></a><span class="params">(<span name="f">f: LogicOperator</span>, <span name="exp">exp: Exp</span>, <span name="other">other: Option[Exp]</span>)</span><span class="result"> extends Exp with Product with Serializable</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="_root_.LogicOp" data-isabs="false">
+      <a id="LogicOp:LogicOp"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="LogicOp.html"><span class="name">LogicOp</span></a><span class="params">(<span name="s">s: String</span>)</span><span class="result"> extends Token with Product with Serializable</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Represents a logic operator</p>
+    </li><li visbl="pub" name="_root_.LogicOperator" data-isabs="true">
+      <a id="LogicOperator:LogicOperator"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="LogicOperator.html"><span class="name">LogicOperator</span></a><span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="_root_.Num" data-isabs="true">
       <a id="Num:Num"></a>
       <h4 class="signature">
@@ -304,7 +436,7 @@ Contains operators overloading and abstract evaluation method
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="Num.html"><span class="name">Num</span></a><span class="result"> extends Object</span>
+        <a href="Num.html"><span class="name">Num</span></a><span class="result"> extends Value</span>
       </span>
       </h4>
       <p class="comment cmt">Represents a number (integer or double)
@@ -384,6 +516,19 @@ Contains operators overloading and abstract evaluation method
       </span>
       </h4>
       <p class="comment cmt">Parses the tokens returned by the <a name="Lexer" class="extype" href="Lexer.html">Lexer</a> passed</p>
+    </li><li visbl="pub" name="_root_.PrintStmt" data-isabs="false">
+      <a id="PrintStmt:PrintStmt"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="PrintStmt.html"><span class="name">PrintStmt</span></a><span class="params">(<span name="exp">exp: Exp</span>)</span><span class="result"> extends Stmt with Product with Serializable</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Represents a statement to print a value
+</p>
     </li><li visbl="pub" name="_root_.Printable" data-isabs="true">
       <a id="Printable:Printable"></a>
       <h4 class="signature">
@@ -436,6 +581,42 @@ Contains operators overloading and abstract evaluation method
       </h4>
       <p class="comment cmt">Represents a list of statements (as in a block)
 </p>
+    </li><li visbl="pub" name="_root_.Str" data-isabs="false">
+      <a id="Str:Str"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Str.html"><span class="name">Str</span></a><span class="params">(<span name="s">s: String</span>)</span><span class="result"> extends Value with Product with Serializable</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="_root_.StrTok" data-isabs="false">
+      <a id="StrTok:StrTok"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="StrTok.html"><span class="name">StrTok</span></a><span class="params">(<span name="s">s: String</span>)</span><span class="result"> extends Token with Product with Serializable</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Represents a string</p>
+    </li><li visbl="pub" name="_root_.Test" data-isabs="false">
+      <a id="Test:Test"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Test.html"><span class="name">Test</span></a><span class="params">(<span name="op">op: CompOperator</span>, <span name="exp">exp: Exp</span>, <span name="other">other: Exp</span>)</span><span class="result"> extends Exp with Product with Serializable</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="_root_.Token" data-isabs="true">
       <a id="Token:Token"></a>
       <h4 class="signature">
@@ -487,6 +668,18 @@ Contains operators overloading and abstract evaluation method
       </h4>
       <p class="comment cmt">Exception thrown when reference to an undefined variable/function
 </p>
+    </li><li visbl="pub" name="_root_.Value" data-isabs="true">
+      <a id="Value:Value"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Value.html"><span class="name">Value</span></a><span class="result"> extends Object</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="_root_.Var" data-isabs="false">
       <a id="Var:Var"></a>
       <h4 class="signature">
@@ -499,6 +692,18 @@ Contains operators overloading and abstract evaluation method
       </span>
       </h4>
       <p class="comment cmt">Represents an identifier</p>
+    </li><li visbl="pub" name="_root_.WhileStmt" data-isabs="false">
+      <a id="WhileStmt:WhileStmt"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="WhileStmt.html"><span class="name">WhileStmt</span></a><span class="params">(<span name="cond">cond: Exp</span>, <span name="stmts">stmts: StmtList</span>)</span><span class="result"> extends Stmt with Product with Serializable</span>
+      </span>
+      </h4>
+      
     </li></ol>
             </div>
 
@@ -519,6 +724,18 @@ Contains operators overloading and abstract evaluation method
       </h4>
       <p class="comment cmt">Represents an addition
 </p>
+    </li><li visbl="pub" name="_root_.And" data-isabs="false">
+      <a id="And:And"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="And$.html"><span class="name">And</span></a><span class="result"> extends LogicOperator with Product with Serializable</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="_root_.BuiltinFunctions" data-isabs="false">
       <a id="BuiltinFunctions:BuiltinFunctions"></a>
       <h4 class="signature">
@@ -532,19 +749,18 @@ Contains operators overloading and abstract evaluation method
       </h4>
       <p class="comment cmt">Object containing program builtins functions
 </p>
-    </li><li visbl="pub" name="_root_.DefVar" data-isabs="false">
-      <a id="DefVar:DefVar"></a>
+    </li><li visbl="pub" name="_root_.CompOperator" data-isabs="false">
+      <a id="CompOperator:CompOperator"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="DefVar$.html"><span class="name">DefVar</span></a><span class="result"> extends Operator with Product with Serializable</span>
+        <a href="CompOperator$.html"><span class="name">CompOperator</span></a><span class="result"> extends AnyRef</span>
       </span>
       </h4>
-      <p class="comment cmt">Represents the assignment operator =
-</p>
+      
     </li><li visbl="pub" name="_root_.Div" data-isabs="false">
       <a id="Div:Div"></a>
       <h4 class="signature">
@@ -583,6 +799,18 @@ Contains operators overloading and abstract evaluation method
       </span>
       </h4>
       <p class="comment cmt">Represents the end of file</p>
+    </li><li visbl="pub" name="_root_.Eq" data-isabs="false">
+      <a id="Eq:Eq"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Eq$.html"><span class="name">Eq</span></a><span class="result"> extends CompOperator with Product with Serializable</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="_root_.Exp" data-isabs="false">
       <a id="Exp:Exp"></a>
       <h4 class="signature">
@@ -597,6 +825,42 @@ Contains operators overloading and abstract evaluation method
       <p class="comment cmt">Companion object of Exp
 Contains factory methods to create Exp
 </p>
+    </li><li visbl="pub" name="_root_.False" data-isabs="false">
+      <a id="False:False"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="False$.html"><span class="name">False</span></a><span class="result"> extends Bool with Product with Serializable</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="_root_.Gt" data-isabs="false">
+      <a id="Gt:Gt"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Gt$.html"><span class="name">Gt</span></a><span class="result"> extends CompOperator with Product with Serializable</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="_root_.Gte" data-isabs="false">
+      <a id="Gte:Gte"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Gte$.html"><span class="name">Gte</span></a><span class="result"> extends CompOperator with Product with Serializable</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="_root_.Lexer" data-isabs="false">
       <a id="Lexer:Lexer"></a>
       <h4 class="signature">
@@ -611,6 +875,30 @@ Contains factory methods to create Exp
       <p class="comment cmt">Companion object for Lexer
 Contains a list of the keywords
 </p>
+    </li><li visbl="pub" name="_root_.Lt" data-isabs="false">
+      <a id="Lt:Lt"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Lt$.html"><span class="name">Lt</span></a><span class="result"> extends CompOperator with Product with Serializable</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="_root_.Lte" data-isabs="false">
+      <a id="Lte:Lte"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Lte$.html"><span class="name">Lte</span></a><span class="result"> extends CompOperator with Product with Serializable</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="_root_.Main" data-isabs="false">
       <a id="Main:Main"></a>
       <h4 class="signature">
@@ -623,6 +911,19 @@ Contains a list of the keywords
       </span>
       </h4>
       
+    </li><li visbl="pub" name="_root_.Mod" data-isabs="false">
+      <a id="Mod:Mod"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Mod$.html"><span class="name">Mod</span></a><span class="result"> extends Binary with Product with Serializable</span>
+      </span>
+      </h4>
+      <p class="comment cmt">Represents a modulo op
+</p>
     </li><li visbl="pub" name="_root_.Mul" data-isabs="false">
       <a id="Mul:Mul"></a>
       <h4 class="signature">
@@ -636,6 +937,18 @@ Contains a list of the keywords
       </h4>
       <p class="comment cmt">Represents a multiplication
 </p>
+    </li><li visbl="pub" name="_root_.Neq" data-isabs="false">
+      <a id="Neq:Neq"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Neq$.html"><span class="name">Neq</span></a><span class="result"> extends CompOperator with Product with Serializable</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="_root_.NewLine" data-isabs="false">
       <a id="NewLine:NewLine"></a>
       <h4 class="signature">
@@ -648,6 +961,18 @@ Contains a list of the keywords
       </span>
       </h4>
       <p class="comment cmt">Represents a new line</p>
+    </li><li visbl="pub" name="_root_.Not" data-isabs="false">
+      <a id="Not:Not"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Not$.html"><span class="name">Not</span></a><span class="result"> extends LogicOperator with Product with Serializable</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="_root_.Null" data-isabs="false">
       <a id="Null:Null"></a>
       <h4 class="signature">
@@ -661,6 +986,18 @@ Contains a list of the keywords
       </h4>
       <p class="comment cmt">Represents a null value
 </p>
+    </li><li visbl="pub" name="_root_.Or" data-isabs="false">
+      <a id="Or:Or"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Or$.html"><span class="name">Or</span></a><span class="result"> extends LogicOperator with Product with Serializable</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="_root_.Pow" data-isabs="false">
       <a id="Pow:Pow"></a>
       <h4 class="signature">
@@ -701,6 +1038,18 @@ Contains the program stack and methods to act on it
       </h4>
       <p class="comment cmt">Represents a substraction
 </p>
+    </li><li visbl="pub" name="_root_.True" data-isabs="false">
+      <a id="True:True"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="True$.html"><span class="name">True</span></a><span class="result"> extends Bool with Product with Serializable</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="_root_.UnaryAdd" data-isabs="false">
       <a id="UnaryAdd:UnaryAdd"></a>
       <h4 class="signature">

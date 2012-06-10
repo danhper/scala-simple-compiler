@@ -25,14 +25,14 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">Num</span><span class="result"> extends <a name="Object" class="extype" href="Object.html">Object</a></span>
+        <span class="name">Num</span><span class="result"> extends <a name="Value" class="extype" href="Value.html">Value</a></span>
       </span>
       </h4>
       
       <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>Represents a number (integer or double)
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a name="Object" class="extype" href="Object.html">Object</a>, <a name="Exp" class="extype" href="Exp.html">Exp</a>, AnyRef, <span name="scala.Any" class="extype">Any</span></div>
+          <div class="superTypes hiddenContent"><a name="Value" class="extype" href="Value.html">Value</a>, <a name="Object" class="extype" href="Object.html">Object</a>, <a name="Exp" class="extype" href="Exp.html">Exp</a>, AnyRef, <span name="scala.Any" class="extype">Any</span></div>
         </div><div class="toggleContainer block">
           <span class="toggle">Known Subclasses</span>
           <div class="subClasses hiddenContent"><a name="DoubleNum" class="extype" href="DoubleNum.html">DoubleNum</a>, <a name="IntNum" class="extype" href="IntNum.html">IntNum</a></div>
@@ -49,7 +49,7 @@
               <span class="filtertype">Inherited</span>
               <ol><li class="hideall out"><span>Hide All</span></li>
               <li class="showall in"><span>Show all</span></li></ol>
-              <ol id="linearization"><li name="Num" class="in"><span>Num</span></li><li name="Object" class="in"><span>Object</span></li><li name="Exp" class="in"><span>Exp</span></li><li name="scala.AnyRef" class="in"><span>AnyRef</span></li><li name="scala.Any" class="in"><span>Any</span></li></ol>
+              <ol id="linearization"><li name="Num" class="in"><span>Num</span></li><li name="Value" class="in"><span>Value</span></li><li name="Object" class="in"><span>Object</span></li><li name="Exp" class="in"><span>Exp</span></li><li name="scala.AnyRef" class="in"><span>AnyRef</span></li><li name="scala.Any" class="in"><span>Any</span></li></ol>
             </div>
         <div id="visbl">
             <span class="filtertype">Visibility</span>
@@ -81,14 +81,14 @@
         <div class="values members" id="values">
               <h3>Abstract Value Members</h3>
               <ol><li visbl="pub" name="Num#getDoubleVal" data-isabs="true">
-      <a id="getDoubleVal:Double"></a>
+      <a id="getDoubleVal:BigDecimal"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">abstract </span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getDoubleVal</span><span class="result">: <span name="scala.Double" class="extype">Double</span></span>
+        <span class="name">getDoubleVal</span><span class="result">: BigDecimal</span>
       </span>
       </h4>
       
@@ -133,6 +133,31 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="Num#%" data-isabs="false">
+      <a id="%(Num):DoubleNum"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: $percent">%</span><span class="params">(<span name="that">that: <a name="Num" class="extype" href="">Num</a></span>)</span><span class="result">: <a name="DoubleNum" class="extype" href="DoubleNum.html">DoubleNum</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Overloading of operator to get a double value
+</p>
+    </li><li visbl="pub" name="Exp#%" data-isabs="false">
+      <a id="%(Exp):Exp"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: $percent">%</span><span class="params">(<span name="other">other: <a name="Exp" class="extype" href="Exp.html">Exp</a></span>)</span><span class="result">: <a name="Exp" class="extype" href="Exp.html">Exp</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="Exp" class="extype" href="Exp.html">Exp</a></dd></dl></div>
     </li><li visbl="pub" name="Num#*" data-isabs="false">
       <a id="*(Num):DoubleNum"></a>
       <h4 class="signature">
@@ -144,7 +169,7 @@
         <span class="name" title="gt4s: $times">*</span><span class="params">(<span name="that">that: <a name="Num" class="extype" href="">Num</a></span>)</span><span class="result">: <a name="DoubleNum" class="extype" href="DoubleNum.html">DoubleNum</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Overloading of operators to get a double value
+      <p class="shortcomment cmt">Overloading of operator to get a double value
 </p>
     </li><li visbl="pub" name="Exp#*" data-isabs="false">
       <a id="*(Exp):Exp"></a>
@@ -169,7 +194,7 @@
         <span class="name" title="gt4s: $times$times">**</span><span class="params">(<span name="that">that: <a name="Num" class="extype" href="">Num</a></span>)</span><span class="result">: <a name="DoubleNum" class="extype" href="DoubleNum.html">DoubleNum</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Overloading of operators to get a double value
+      <p class="shortcomment cmt">Overloading of operator to get a double value
 </p>
     </li><li visbl="pub" name="Exp#**" data-isabs="false">
       <a id="**(Exp):Exp"></a>
@@ -194,7 +219,7 @@
         <span class="name" title="gt4s: $plus">+</span><span class="params">(<span name="that">that: <a name="Num" class="extype" href="">Num</a></span>)</span><span class="result">: <a name="DoubleNum" class="extype" href="DoubleNum.html">DoubleNum</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Overloading of operators to get a double value
+      <p class="shortcomment cmt">Overloading of operator to get a double value
 </p>
     </li><li visbl="pub" name="Exp#+" data-isabs="false">
       <a id="+(Exp):Exp"></a>
@@ -219,7 +244,7 @@
         <span class="name" title="gt4s: $minus">-</span><span class="params">(<span name="that">that: <a name="Num" class="extype" href="">Num</a></span>)</span><span class="result">: <a name="DoubleNum" class="extype" href="DoubleNum.html">DoubleNum</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Overloading of operators to get a double value
+      <p class="shortcomment cmt">Overloading of operator to get a double value
 </p>
     </li><li visbl="pub" name="Exp#-" data-isabs="false">
       <a id="-(Exp):Exp"></a>
@@ -244,7 +269,7 @@
         <span class="name" title="gt4s: $div">/</span><span class="params">(<span name="that">that: <a name="Num" class="extype" href="">Num</a></span>)</span><span class="result">: <a name="DoubleNum" class="extype" href="DoubleNum.html">DoubleNum</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Overloading of operators to get a double value
+      <p class="shortcomment cmt">Overloading of operator to get a double value
 </p>
     </li><li visbl="pub" name="Exp#/" data-isabs="false">
       <a id="/(Exp):Exp"></a>
@@ -333,18 +358,18 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li visbl="pub" name="Num#eval" data-isabs="false">
-      <a id="eval:Num"></a>
+    </li><li visbl="pub" name="Object#eval" data-isabs="false">
+      <a id="eval:Object"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">eval</span><span class="result">: <a name="Num" class="extype" href="">Num</a></span>
+        <span class="name">eval</span><span class="result">: <a name="Object" class="extype" href="Object.html">Object</a></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="Num" class="extype" href="">Num</a> → <a name="Exp" class="extype" href="Exp.html">Exp</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="Object" class="extype" href="Object.html">Object</a> → <a name="Exp" class="extype" href="Exp.html">Exp</a></dd></dl></div>
     </li><li visbl="prt" name="scala.AnyRef#finalize" data-isabs="false">
       <a id="finalize():Unit"></a>
       <h4 class="signature">
@@ -520,7 +545,9 @@
         </div>
 
         <div id="inheritedMembers">
-        <div name="Object" class="parent">
+        <div name="Value" class="parent">
+              <h3>Inherited from <a name="Value" class="extype" href="Value.html">Value</a></h3>
+            </div><div name="Object" class="parent">
               <h3>Inherited from <a name="Object" class="extype" href="Object.html">Object</a></h3>
             </div><div name="Exp" class="parent">
               <h3>Inherited from <a name="Exp" class="extype" href="Exp.html">Exp</a></h3>

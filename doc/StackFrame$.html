@@ -150,6 +150,18 @@ Contains the program stack and methods to act on it
       </h4>
       <p class="shortcomment cmt">Adds a value (variable or function) to the current stack frame</p><div class="fullcomment"><div class="comment cmt"><p>Adds a value (variable or function) to the current stack frame</p></div><dl class="paramcmts block"><dt class="param">key</dt><dd class="cmt"><p>the value name</p></dd><dt class="param">v</dt><dd class="cmt"><p>the value to add
 </p></dd></dl></div>
+    </li><li visbl="pub" name="StackFrame#apply" data-isabs="false">
+      <a id="apply(StackFrame):StackFrame"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="stackFrame">stackFrame: <a name="StackFrame" class="extype" href="StackFrame.html">StackFrame</a></span>)</span><span class="result">: <a name="StackFrame" class="extype" href="StackFrame.html">StackFrame</a></span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="scala.Any#asInstanceOf" data-isabs="false">
       <a id="asInstanceOf[T0]:T0"></a>
       <h4 class="signature">
@@ -228,6 +240,19 @@ Contains the program stack and methods to act on it
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="StackFrame#getCurrentFrame" data-isabs="false">
+      <a id="getCurrentFrame:StackFrame"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getCurrentFrame</span><span class="result">: <a name="StackFrame" class="extype" href="StackFrame.html">StackFrame</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns the current stack frame</p><div class="fullcomment"><div class="comment cmt"><p>Returns the current stack frame</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>StackFrame
+</p></dd></dl></div>
     </li><li visbl="pub" name="StackFrame#getValue" data-isabs="false">
       <a id="getValue(Var):Object"></a>
       <h4 class="signature">
@@ -241,6 +266,18 @@ Contains the program stack and methods to act on it
       </h4>
       <p class="shortcomment cmt">Returns the value corresponding to the key if it exists</p><div class="fullcomment"><div class="comment cmt"><p>Returns the value corresponding to the key if it exists</p></div><dl class="paramcmts block"><dt class="param">key</dt><dd class="cmt"><p>the value name</p></dd><dt>returns</dt><dd class="cmt"><p>Object
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">UndefinedException</span></dd></dl></div>
+    </li><li visbl="pub" name="StackFrame#getValueOption" data-isabs="false">
+      <a id="getValueOption(Var):Option[Object]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getValueOption</span><span class="params">(<span name="key">key: <a name="Var" class="extype" href="Var.html">Var</a></span>)</span><span class="result">: <span name="scala.Option" class="extype">Option</span>[<a name="Object" class="extype" href="Object.html">Object</a>]</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
       <h4 class="signature">
@@ -328,6 +365,19 @@ Contains the program stack and methods to act on it
       <p class="shortcomment cmt">The program stack as a stack of stack frames
 </p>
     </li><li visbl="pub" name="StackFrame#startNewFrame" data-isabs="false">
+      <a id="startNewFrame(StackFrame):Stack[StackFrame]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">startNewFrame</span><span class="params">(<span name="stackFrame">stackFrame: <a name="StackFrame" class="extype" href="StackFrame.html">StackFrame</a></span>)</span><span class="result">: <span name="scala.collection.mutable.Stack" class="extype">Stack</span>[<a name="StackFrame" class="extype" href="StackFrame.html">StackFrame</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Pushes the given stack frame on the stack</p><div class="fullcomment"><div class="comment cmt"><p>Pushes the given stack frame on the stack</p></div><dl class="paramcmts block"><dt class="param">stackFrame</dt><dd class="cmt"><p>the stack frame to push
+</p></dd></dl></div>
+    </li><li visbl="pub" name="StackFrame#startNewFrame" data-isabs="false">
       <a id="startNewFrame:Stack[StackFrame]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -351,7 +401,7 @@ Contains the program stack and methods to act on it
         <span class="name">stopFrame</span><span class="result">: <a name="StackFrame" class="extype" href="StackFrame.html">StackFrame</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Deletes the last stack frame
+      <p class="shortcomment cmt">Pops the last stack frame
 </p>
     </li><li visbl="pub" name="scala.AnyRef#synchronized" data-isabs="false">
       <a id="synchronized[T0](⇒ T0):T0"></a>

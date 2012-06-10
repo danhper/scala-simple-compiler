@@ -317,6 +317,18 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li visbl="pub" name="Parser#lookAhead" data-isabs="false">
+      <a id="lookAhead:Token"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">lookAhead</span><span class="result">: <a name="Token" class="extype" href="Token.html">Token</a></span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="scala.AnyRef#ne" data-isabs="false">
       <a id="ne(AnyRef):Boolean"></a>
       <h4 class="signature">
@@ -329,6 +341,18 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="Parser#nextTokens" data-isabs="false">
+      <a id="nextTokens:Queue[Token]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">nextTokens</span><span class="result">: <span name="scala.collection.mutable.Queue" class="extype">Queue</span>[<a name="Token" class="extype" href="Token.html">Token</a>]</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="scala.AnyRef#notify" data-isabs="false">
       <a id="notify():Unit"></a>
       <h4 class="signature">
@@ -353,20 +377,62 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li visbl="pub" name="Parser#parseBlock" data-isabs="false">
-      <a id="parseBlock:StmtList"></a>
+    </li><li visbl="pub" name="Parser#parseAndTest" data-isabs="false">
+      <a id="parseAndTest(Option[Exp]):Exp"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">parseBlock</span><span class="result">: <a name="StmtList" class="extype" href="StmtList.html">StmtList</a></span>
+        <span class="name">parseAndTest</span><span class="params">(<span name="e">e: <span name="scala.Option" class="extype">Option</span>[<a name="Exp" class="extype" href="Exp.html">Exp</a>]</span>)</span><span class="result">: <a name="Exp" class="extype" href="Exp.html">Exp</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Parses a test of the form
+test (&amp;&amp; test)*</p><div class="fullcomment"><div class="comment cmt"><p>Parses a test of the form
+test (&amp;&amp; test)*</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Exp
+</p></dd></dl></div>
+    </li><li visbl="pub" name="Parser#parseAssign" data-isabs="false">
+      <a id="parseAssign(String,String):Stmt"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parseAssign</span><span class="params">(<span name="s">s: String</span>, <span name="a">a: String</span>)</span><span class="result">: <a name="Stmt" class="extype" href="Stmt.html">Stmt</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="Parser#parseBlock" data-isabs="false">
+      <a id="parseBlock(Boolean):StmtList"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parseBlock</span><span class="params">(<span name="isIf">isIf: <span name="scala.Boolean" class="extype">Boolean</span></span>)</span><span class="result">: <a name="StmtList" class="extype" href="StmtList.html">StmtList</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Parses a block begining by a ':' and ending by
 the keyword 'end'</p><div class="fullcomment"><div class="comment cmt"><p>Parses a block begining by a ':' and ending by
 the keyword 'end'</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>StmtList the statements in the block
+</p></dd></dl></div>
+    </li><li visbl="pub" name="Parser#parseCompTest" data-isabs="false">
+      <a id="parseCompTest(Option[Exp]):Exp"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parseCompTest</span><span class="params">(<span name="e">e: <span name="scala.Option" class="extype">Option</span>[<a name="Exp" class="extype" href="Exp.html">Exp</a>]</span>)</span><span class="result">: <a name="Exp" class="extype" href="Exp.html">Exp</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Parses a comparison of the form
+exp ((== | != | &lt; | &lt;= | &gt; | &gt;=) exp)*</p><div class="fullcomment"><div class="comment cmt"><p>Parses a comparison of the form
+exp ((== | != | &lt; | &lt;= | &gt; | &gt;=) exp)*</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Exp
 </p></dd></dl></div>
     </li><li visbl="pub" name="Parser#parseExpression" data-isabs="false">
       <a id="parseExpression:Exp"></a>
@@ -385,6 +451,18 @@ term (- expression)*</p><div class="fullcomment"><div class="comment cmt"><p>Par
 term (+ expression)*
 term (- expression)*</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Exp
 </p></dd></dl></div>
+    </li><li visbl="pub" name="Parser#parseExpressionOrTest" data-isabs="false">
+      <a id="parseExpressionOrTest:Exp"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parseExpressionOrTest</span><span class="result">: <a name="Exp" class="extype" href="Exp.html">Exp</a></span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="Parser#parseFactor" data-isabs="false">
       <a id="parseFactor:Exp"></a>
       <h4 class="signature">
@@ -414,6 +492,37 @@ id = exp
 id(params)
 %    -&gt;last input</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Exp
 </p></dd></dl></div>
+    </li><li visbl="pub" name="Parser#parseFile" data-isabs="false">
+      <a id="parseFile:StmtList"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parseFile</span><span class="result">: <a name="StmtList" class="extype" href="StmtList.html">StmtList</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="Parser#parseFor" data-isabs="false">
+      <a id="parseFor:Stmt"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parseFor</span><span class="result">: <a name="Stmt" class="extype" href="Stmt.html">Stmt</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Parses a for statement of the form
+for <code>var</code> in <code>exp</code> to <code>exp</code>:
+   stmts
+end</p><div class="fullcomment"><div class="comment cmt"><p>Parses a for statement of the form
+for <code>var</code> in <code>exp</code> to <code>exp</code>:
+   stmts
+end</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Stmt
+</p></dd></dl></div>
     </li><li visbl="pub" name="Parser#parseFormalParameters" data-isabs="false">
       <a id="parseFormalParameters:List[Var]"></a>
       <h4 class="signature">
@@ -439,6 +548,81 @@ id(params)
       </span>
       </h4>
       <p class="shortcomment cmt">Parses a function definition</p><div class="fullcomment"><div class="comment cmt"><p>Parses a function definition</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>FuncDef the parsed function
+</p></dd></dl></div>
+    </li><li visbl="pub" name="Parser#parseIf" data-isabs="false">
+      <a id="parseIf:Stmt"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parseIf</span><span class="result">: <a name="Stmt" class="extype" href="Stmt.html">Stmt</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Parses an if statement of the form
+if test:
+stmts
+(elif test:
+stmts)*
+(else:
+stmts)?
+</p><div class="fullcomment"><div class="comment cmt"><p>Parses an if statement of the form
+if test:
+stmts
+(elif test:
+stmts)*
+(else:
+stmts)?
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Stmt
+</p></dd></dl></div>
+    </li><li visbl="pub" name="Parser#parseImport" data-isabs="false">
+      <a id="parseImport:Stmt"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parseImport</span><span class="result">: <a name="Stmt" class="extype" href="Stmt.html">Stmt</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="Parser#parseNotTest" data-isabs="false">
+      <a id="parseNotTest(Option[Exp]):Exp"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parseNotTest</span><span class="params">(<span name="e">e: <span name="scala.Option" class="extype">Option</span>[<a name="Exp" class="extype" href="Exp.html">Exp</a>]</span>)</span><span class="result">: <a name="Exp" class="extype" href="Exp.html">Exp</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Parses a test of the form
+!test
+or simply
+test</p><div class="fullcomment"><div class="comment cmt"><p>Parses a test of the form
+!test
+or simply
+test</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Exp
+</p></dd></dl></div>
+    </li><li visbl="pub" name="Parser#parseOrTest" data-isabs="false">
+      <a id="parseOrTest(Option[Exp]):Exp"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parseOrTest</span><span class="params">(<span name="e">e: <span name="scala.Option" class="extype">Option</span>[<a name="Exp" class="extype" href="Exp.html">Exp</a>]</span>)</span><span class="result">: <a name="Exp" class="extype" href="Exp.html">Exp</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Parses a test of the form
+test (|| test)*
+where test is an expression or a comparison</p><div class="fullcomment"><div class="comment cmt"><p>Parses a test of the form
+test (|| test)*
+where test is an expression or a comparison</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Exp
 </p></dd></dl></div>
     </li><li visbl="pub" name="Parser#parseParameters" data-isabs="false">
       <a id="parseParameters:List[Exp]"></a>
@@ -467,6 +651,21 @@ id(params)
       <p class="shortcomment cmt">Parses a pow of the form
 factor (^ pow)*</p><div class="fullcomment"><div class="comment cmt"><p>Parses a pow of the form
 factor (^ pow)*</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Exp
+</p></dd></dl></div>
+    </li><li visbl="pub" name="Parser#parsePrint" data-isabs="false">
+      <a id="parsePrint:Stmt"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parsePrint</span><span class="result">: <a name="Stmt" class="extype" href="Stmt.html">Stmt</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Parses a print statement of the form
+print(exp)</p><div class="fullcomment"><div class="comment cmt"><p>Parses a print statement of the form
+print(exp)</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Stmt
 </p></dd></dl></div>
     </li><li visbl="pub" name="Parser#parseStatement" data-isabs="false">
       <a id="parseStatement:Stmt"></a>
@@ -507,9 +706,32 @@ factor (^ pow)*</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="
       </h4>
       <p class="shortcomment cmt">Parses a term of the form
 pow (* term)*
-pow (/ term)*</p><div class="fullcomment"><div class="comment cmt"><p>Parses a term of the form
+pow (/ term)*
+pow (% term)*</p><div class="fullcomment"><div class="comment cmt"><p>Parses a term of the form
 pow (* term)*
-pow (/ term)*</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Exp
+pow (/ term)*
+pow (% term)*</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Exp
+</p></dd></dl></div>
+    </li><li visbl="pub" name="Parser#parseWhile" data-isabs="false">
+      <a id="parseWhile:Stmt"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parseWhile</span><span class="result">: <a name="Stmt" class="extype" href="Stmt.html">Stmt</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Parses a while statement of the form
+while <code>test</code>:
+stmts
+end
+</p><div class="fullcomment"><div class="comment cmt"><p>Parses a while statement of the form
+while <code>test</code>:
+stmts
+end
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Stmt
 </p></dd></dl></div>
     </li><li visbl="pub" name="Parser#printIndent" data-isabs="false">
       <a id="printIndent:Unit"></a>

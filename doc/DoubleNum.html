@@ -25,14 +25,14 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">DoubleNum</span><span class="params">(<span name="n">n: <span name="scala.Double" class="extype">Double</span></span>)</span><span class="result"> extends <a name="Num" class="extype" href="Num.html">Num</a> with <span name="scala.Product" class="extype">Product</span> with <span name="scala.Serializable" class="extype">Serializable</span></span>
+        <span class="name">DoubleNum</span><span class="params">(<span name="n">n: BigDecimal</span>)</span><span class="result"> extends <a name="Num" class="extype" href="Num.html">Num</a> with <span name="scala.Product" class="extype">Product</span> with <span name="scala.Serializable" class="extype">Serializable</span></span>
       </span>
       </h4>
       
       <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>Represents a double</p></div><dl class="paramcmts block"><dt class="param">n</dt><dd class="cmt"><p>the double value
 </p></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span name="scala.Serializable" class="extype">Serializable</span>, <span name="java.io.Serializable" class="extype">Serializable</span>, <span name="scala.Product" class="extype">Product</span>, <span name="scala.Equals" class="extype">Equals</span>, <a name="Num" class="extype" href="Num.html">Num</a>, <a name="Object" class="extype" href="Object.html">Object</a>, <a name="Exp" class="extype" href="Exp.html">Exp</a>, AnyRef, <span name="scala.Any" class="extype">Any</span></div>
+          <div class="superTypes hiddenContent"><span name="scala.Serializable" class="extype">Serializable</span>, <span name="java.io.Serializable" class="extype">Serializable</span>, <span name="scala.Product" class="extype">Product</span>, <span name="scala.Equals" class="extype">Equals</span>, <a name="Num" class="extype" href="Num.html">Num</a>, <a name="Value" class="extype" href="Value.html">Value</a>, <a name="Object" class="extype" href="Object.html">Object</a>, <a name="Exp" class="extype" href="Exp.html">Exp</a>, AnyRef, <span name="scala.Any" class="extype">Any</span></div>
         </div></div>
     
 
@@ -46,7 +46,7 @@
               <span class="filtertype">Inherited</span>
               <ol><li class="hideall out"><span>Hide All</span></li>
               <li class="showall in"><span>Show all</span></li></ol>
-              <ol id="linearization"><li name="DoubleNum" class="in"><span>DoubleNum</span></li><li name="scala.Serializable" class="in"><span>Serializable</span></li><li name="java.io.Serializable" class="in"><span>Serializable</span></li><li name="scala.Product" class="in"><span>Product</span></li><li name="scala.Equals" class="in"><span>Equals</span></li><li name="Num" class="in"><span>Num</span></li><li name="Object" class="in"><span>Object</span></li><li name="Exp" class="in"><span>Exp</span></li><li name="scala.AnyRef" class="in"><span>AnyRef</span></li><li name="scala.Any" class="in"><span>Any</span></li></ol>
+              <ol id="linearization"><li name="DoubleNum" class="in"><span>DoubleNum</span></li><li name="scala.Serializable" class="in"><span>Serializable</span></li><li name="java.io.Serializable" class="in"><span>Serializable</span></li><li name="scala.Product" class="in"><span>Product</span></li><li name="scala.Equals" class="in"><span>Equals</span></li><li name="Num" class="in"><span>Num</span></li><li name="Value" class="in"><span>Value</span></li><li name="Object" class="in"><span>Object</span></li><li name="Exp" class="in"><span>Exp</span></li><li name="scala.AnyRef" class="in"><span>AnyRef</span></li><li name="scala.Any" class="in"><span>Any</span></li></ol>
             </div>
         <div id="visbl">
             <span class="filtertype">Visibility</span>
@@ -66,7 +66,7 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">DoubleNum</span><span class="params">(<span name="n">n: <span name="scala.Double" class="extype">Double</span></span>)</span>
+        <span class="name">DoubleNum</span><span class="params">(<span name="n">n: BigDecimal</span>)</span>
       </span>
       </h4>
       <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">n</dt><dd class="cmt"><p>the double value
@@ -116,6 +116,32 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="Num#%" data-isabs="false">
+      <a id="%(Num):DoubleNum"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: $percent">%</span><span class="params">(<span name="that">that: <a name="Num" class="extype" href="Num.html">Num</a></span>)</span><span class="result">: <a name="DoubleNum" class="extype" href="">DoubleNum</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Overloading of operator to get a double value
+</p><div class="fullcomment"><div class="comment cmt"><p>Overloading of operator to get a double value
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="Num" class="extype" href="Num.html">Num</a></dd></dl></div>
+    </li><li visbl="pub" name="Exp#%" data-isabs="false">
+      <a id="%(Exp):Exp"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: $percent">%</span><span class="params">(<span name="other">other: <a name="Exp" class="extype" href="Exp.html">Exp</a></span>)</span><span class="result">: <a name="Exp" class="extype" href="Exp.html">Exp</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="Exp" class="extype" href="Exp.html">Exp</a></dd></dl></div>
     </li><li visbl="pub" name="Num#*" data-isabs="false">
       <a id="*(Num):DoubleNum"></a>
       <h4 class="signature">
@@ -127,8 +153,8 @@
         <span class="name" title="gt4s: $times">*</span><span class="params">(<span name="that">that: <a name="Num" class="extype" href="Num.html">Num</a></span>)</span><span class="result">: <a name="DoubleNum" class="extype" href="">DoubleNum</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Overloading of operators to get a double value
-</p><div class="fullcomment"><div class="comment cmt"><p>Overloading of operators to get a double value
+      <p class="shortcomment cmt">Overloading of operator to get a double value
+</p><div class="fullcomment"><div class="comment cmt"><p>Overloading of operator to get a double value
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="Num" class="extype" href="Num.html">Num</a></dd></dl></div>
     </li><li visbl="pub" name="Exp#*" data-isabs="false">
       <a id="*(Exp):Exp"></a>
@@ -153,8 +179,8 @@
         <span class="name" title="gt4s: $times$times">**</span><span class="params">(<span name="that">that: <a name="Num" class="extype" href="Num.html">Num</a></span>)</span><span class="result">: <a name="DoubleNum" class="extype" href="">DoubleNum</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Overloading of operators to get a double value
-</p><div class="fullcomment"><div class="comment cmt"><p>Overloading of operators to get a double value
+      <p class="shortcomment cmt">Overloading of operator to get a double value
+</p><div class="fullcomment"><div class="comment cmt"><p>Overloading of operator to get a double value
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="Num" class="extype" href="Num.html">Num</a></dd></dl></div>
     </li><li visbl="pub" name="Exp#**" data-isabs="false">
       <a id="**(Exp):Exp"></a>
@@ -179,8 +205,8 @@
         <span class="name" title="gt4s: $plus">+</span><span class="params">(<span name="that">that: <a name="Num" class="extype" href="Num.html">Num</a></span>)</span><span class="result">: <a name="DoubleNum" class="extype" href="">DoubleNum</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Overloading of operators to get a double value
-</p><div class="fullcomment"><div class="comment cmt"><p>Overloading of operators to get a double value
+      <p class="shortcomment cmt">Overloading of operator to get a double value
+</p><div class="fullcomment"><div class="comment cmt"><p>Overloading of operator to get a double value
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="Num" class="extype" href="Num.html">Num</a></dd></dl></div>
     </li><li visbl="pub" name="Exp#+" data-isabs="false">
       <a id="+(Exp):Exp"></a>
@@ -205,8 +231,8 @@
         <span class="name" title="gt4s: $minus">-</span><span class="params">(<span name="that">that: <a name="Num" class="extype" href="Num.html">Num</a></span>)</span><span class="result">: <a name="DoubleNum" class="extype" href="">DoubleNum</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Overloading of operators to get a double value
-</p><div class="fullcomment"><div class="comment cmt"><p>Overloading of operators to get a double value
+      <p class="shortcomment cmt">Overloading of operator to get a double value
+</p><div class="fullcomment"><div class="comment cmt"><p>Overloading of operator to get a double value
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="Num" class="extype" href="Num.html">Num</a></dd></dl></div>
     </li><li visbl="pub" name="Exp#-" data-isabs="false">
       <a id="-(Exp):Exp"></a>
@@ -231,8 +257,8 @@
         <span class="name" title="gt4s: $div">/</span><span class="params">(<span name="that">that: <a name="Num" class="extype" href="Num.html">Num</a></span>)</span><span class="result">: <a name="DoubleNum" class="extype" href="">DoubleNum</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Overloading of operators to get a double value
-</p><div class="fullcomment"><div class="comment cmt"><p>Overloading of operators to get a double value
+      <p class="shortcomment cmt">Overloading of operator to get a double value
+</p><div class="fullcomment"><div class="comment cmt"><p>Overloading of operator to get a double value
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="Num" class="extype" href="Num.html">Num</a></dd></dl></div>
     </li><li visbl="pub" name="Exp#/" data-isabs="false">
       <a id="/(Exp):Exp"></a>
@@ -333,18 +359,18 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="DoubleNum" class="extype" href="">DoubleNum</a> → Equals → AnyRef → Any</dd></dl></div>
-    </li><li visbl="pub" name="Num#eval" data-isabs="false">
-      <a id="eval:Num"></a>
+    </li><li visbl="pub" name="Object#eval" data-isabs="false">
+      <a id="eval:Object"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">eval</span><span class="result">: <a name="Num" class="extype" href="Num.html">Num</a></span>
+        <span class="name">eval</span><span class="result">: <a name="Object" class="extype" href="Object.html">Object</a></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="Num" class="extype" href="Num.html">Num</a> → <a name="Exp" class="extype" href="Exp.html">Exp</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="Object" class="extype" href="Object.html">Object</a> → <a name="Exp" class="extype" href="Exp.html">Exp</a></dd></dl></div>
     </li><li visbl="prt" name="scala.AnyRef#finalize" data-isabs="false">
       <a id="finalize():Unit"></a>
       <h4 class="signature">
@@ -373,26 +399,26 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="DoubleNum#getDoubleVal" data-isabs="false">
-      <a id="getDoubleVal:Double"></a>
+      <a id="getDoubleVal:BigDecimal"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getDoubleVal</span><span class="result">: <span name="scala.Double" class="extype">Double</span></span>
+        <span class="name">getDoubleVal</span><span class="result">: BigDecimal</span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="DoubleNum" class="extype" href="">DoubleNum</a> → <a name="Num" class="extype" href="Num.html">Num</a></dd></dl></div>
     </li><li visbl="pub" name="DoubleNum#getVal" data-isabs="false">
-      <a id="getVal:Double"></a>
+      <a id="getVal:BigDecimal"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getVal</span><span class="result">: <span name="scala.Double" class="extype">Double</span></span>
+        <span class="name">getVal</span><span class="result">: BigDecimal</span>
       </span>
       </h4>
       
@@ -421,14 +447,14 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li visbl="pub" name="DoubleNum#n" data-isabs="false">
-      <a id="n:Double"></a>
+      <a id="n:BigDecimal"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">n</span><span class="result">: <span name="scala.Double" class="extype">Double</span></span>
+        <span class="name">n</span><span class="result">: BigDecimal</span>
       </span>
       </h4>
       <p class="shortcomment cmt">the double value
@@ -537,7 +563,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toString</span><span class="params">()</span><span class="result">: <span name="java.lang.String" class="extype">String</span></span>
+        <span class="name">toString</span><span class="params">()</span><span class="result">: String</span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="DoubleNum" class="extype" href="">DoubleNum</a> → AnyRef → Any</dd></dl></div>
@@ -633,6 +659,8 @@
               <h3>Inherited from <span name="scala.Equals" class="extype">Equals</span></h3>
             </div><div name="Num" class="parent">
               <h3>Inherited from <a name="Num" class="extype" href="Num.html">Num</a></h3>
+            </div><div name="Value" class="parent">
+              <h3>Inherited from <a name="Value" class="extype" href="Value.html">Value</a></h3>
             </div><div name="Object" class="parent">
               <h3>Inherited from <a name="Object" class="extype" href="Object.html">Object</a></h3>
             </div><div name="Exp" class="parent">

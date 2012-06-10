@@ -230,6 +230,23 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="Lexer#getCompOperator" data-isabs="false">
+      <a id="getCompOperator(Char):Token"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getCompOperator</span><span class="params">(<span name="c">c: <span name="scala.Char" class="extype">Char</span></span>)</span><span class="result">: <a name="Token" class="extype" href="Token.html">Token</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Checks for the next operator and returns
+the appropriate logic, assignment or comparison
+operator</p><div class="fullcomment"><div class="comment cmt"><p>Checks for the next operator and returns
+the appropriate logic, assignment or comparison
+operator</p></div><dl class="paramcmts block"><dt class="param">c</dt><dd class="cmt"><p>the previous char</p></dd><dt>returns</dt><dd class="cmt"><p>Token
+</p></dd></dl></div>
     </li><li visbl="pub" name="Lexer#getId" data-isabs="false">
       <a id="getId(String):Token"></a>
       <h4 class="signature">
@@ -244,6 +261,38 @@
       <p class="shortcomment cmt">Reads a string from the buffer and returns it
 Returns a KeyWord if the string is a keyword, else returns an Id</p><div class="fullcomment"><div class="comment cmt"><p>Reads a string from the buffer and returns it
 Returns a KeyWord if the string is a keyword, else returns an Id</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Token
+</p></dd></dl></div>
+    </li><li visbl="pub" name="Lexer#getLogicOperator" data-isabs="false">
+      <a id="getLogicOperator(Char):Token"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getLogicOperator</span><span class="params">(<span name="c">c: <span name="scala.Char" class="extype">Char</span></span>)</span><span class="result">: <a name="Token" class="extype" href="Token.html">Token</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Gets the logic operator (!, &amp;&amp;, ||) or throws
+an exception if could not find it</p><div class="fullcomment"><div class="comment cmt"><p>Gets the logic operator (!, &amp;&amp;, ||) or throws
+an exception if could not find it</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Token
+</p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">BadTokenException</span></dd></dl></div>
+    </li><li visbl="pub" name="Lexer#getOperator" data-isabs="false">
+      <a id="getOperator(Char):Token"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getOperator</span><span class="params">(<span name="c">c: <span name="scala.Char" class="extype">Char</span></span>)</span><span class="result">: <a name="Token" class="extype" href="Token.html">Token</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Checks for the next char after the given one
+and returns the appropriate token
+(normal or assignment operator )</p><div class="fullcomment"><div class="comment cmt"><p>Checks for the next char after the given one
+and returns the appropriate token
+(normal or assignment operator )</p></div><dl class="paramcmts block"><dt class="param">c</dt><dd class="cmt"><p>the previous char</p></dd><dt>returns</dt><dd class="cmt"><p>Token
 </p></dd></dl></div>
     </li><li visbl="pub" name="Lexer#getToken" data-isabs="false">
       <a id="getToken:Token"></a>
@@ -357,6 +406,33 @@ Returns a KeyWord if the string is a keyword, else returns an Id</p></div><dl cl
       </h4>
       <p class="shortcomment cmt">Parses an integer or a floating number</p><div class="fullcomment"><div class="comment cmt"><p>Parses an integer or a floating number</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Token
 </p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">NumberFormatException<p>on overflow</p></span><span class="cmt">BadTokenException<p>if the number has more than one point</p></span></dd></dl></div>
+    </li><li visbl="pub" name="Lexer#parseString" data-isabs="false">
+      <a id="parseString(Char):Token"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parseString</span><span class="params">(<span name="c">c: <span name="scala.Char" class="extype">Char</span></span>)</span><span class="result">: <a name="Token" class="extype" href="Token.html">Token</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Parses a string ended with the char <code>c</code>
+TODO: support for escape character</p><div class="fullcomment"><div class="comment cmt"><p>Parses a string ended with the char <code>c</code>
+TODO: support for escape character</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Token
+</p></dd></dl></div>
+    </li><li visbl="pub" name="Lexer#skipLine" data-isabs="false">
+      <a id="skipLine:Token"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">skipLine</span><span class="result">: <a name="Token" class="extype" href="Token.html">Token</a></span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="scala.AnyRef#synchronized" data-isabs="false">
       <a id="synchronized[T0](⇒ T0):T0"></a>
       <h4 class="signature">

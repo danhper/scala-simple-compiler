@@ -90,6 +90,13 @@ class Lexer(buffer: BufferedIterator[Char]) {
    */
   def getToken: Token = nativeToken match {
     case One(' ') | One('\t') => getToken
+    case One('\r') => lookAhead match {
+      case None => One('\r')
+      case Some(c) => c match {
+        case '\n' => advance; NewLine
+        case _ => getToken
+      }
+    }
     case One('\n') => NewLine
     case One('#') => skipLine
     case token => token

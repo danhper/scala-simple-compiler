@@ -83,11 +83,11 @@ case class ForStmt(v: Var, start: Exp, end: Exp, stmts: StmtList) extends Stmt {
   def execute = {
     val startVal = start eval match {
       case IntNum(n) => n
-      case _ => throw new EvalException("Needs an integer")
+      case _ => throw new EvalException("For loop needs an integer")
     }
     val endVal = end eval match {
       case IntNum(n) => n
-      case _ => throw new EvalException("Needs an integer")
+      case _ => throw new EvalException("For loop needs an integer")
     }
     for(i <- startVal to endVal) {
       StackFrame.addValue(v, IntNum(i))

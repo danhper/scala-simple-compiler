@@ -73,7 +73,7 @@ case object Neq extends CompOperator {
 case object Lt extends CompOperator {
   def fun(a: Object, b: Object) = (a, b) match {
     case (IntNum(x), IntNum(y)) => x < y
-    case (DoubleNum(x), DoubleNum(y)) => x < y
+    case (x: Num, y: Num) => x.getDoubleVal < y.getDoubleVal
     case (x, y) => throw new TypeException(x, Some(y))
   }
 }

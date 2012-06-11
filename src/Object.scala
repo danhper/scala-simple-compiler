@@ -132,7 +132,7 @@ case class DeclaredFunction(name: String, varList: List[Var], stmts: StmtList) e
     checkParamsNum(params)
     val stack = new StackFrame
     varList zip(params) foreach {case (v, exp) => stack.addVal(v, exp eval)}
-    StackFrame.startNewFrame(stack)    
+    StackFrame.startNewFrame(stack)
     val ret = stmts.execute
     StackFrame.stopFrame
     ret    

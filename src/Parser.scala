@@ -100,7 +100,7 @@ class Parser(lexer: Lexer) {
     def parseAll(stmts: List[Stmt]): StmtList = {
       token match {
         case Eof => StmtList(stmts)
-        case KeyWord("end") | KeyWord("elif") | KeyWord("else")=> StmtList(stmts)
+        case KeyWord("end") | KeyWord("elif") | KeyWord("else") => StmtList(stmts)
         case NewLine => printIndent; advance; parseAll(stmts)
         case _ => {
           val stmt = parseStatement
@@ -139,8 +139,8 @@ class Parser(lexer: Lexer) {
   }
 
   def parseImport: Stmt = {
-    token match {
-      case StrTok(fileName) => advance; ImportStmt(fileName)
+    parseExpression match {
+      case Str(fileName) => ImportStmt(fileName)
       case _ => error("Missing filename after import")
     }
   }

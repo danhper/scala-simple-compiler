@@ -1,0 +1,278 @@
+This is pTeX, Version 3.141592-p3.1.10 (euc) (Web2C 7.5.4) (format=platex-euc 2012.6.1)  13 JUN 2012 02:33
+**ebnf.tex
+(./ebnf.tex
+pLaTeX2e <2006/11/10>+0 (based on LaTeX2e <2003/12/01> patch level 0)
+(/opt/local/share/texmf/ptex/platex/jsclasses/jsarticle.cls
+Document Class: jsarticle 2010/03/14 okumura
+(/opt/local/share/texmf-dist/tex/latex/base/fleqn.clo
+File: fleqn.clo 1998/08/17 v1.1c Standard LaTeX option (flush left equations)
+\mathindent=\dimen118
+)
+LaTeX Info: Redefining \rmfamily on input line 332.
+LaTeX Info: Redefining \sffamily on input line 335.
+LaTeX Info: Redefining \ttfamily on input line 338.
+\symmincho=\mathgroup4
+LaTeX Font Info:    Overwriting symbol font `mincho' in version `bold'
+(Font)                  JY1/mc/m/n --> JY1/gt/m/n on input line 403.
+LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 592.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 592.
+\fullwidth=\dimen119
+LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
+(Font)              scaled to size 7.68799pt on input line 739.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 7.68799pt on input line 739.
+\c@part=\count81
+\c@section=\count82
+\c@subsection=\count83
+\c@subsubsection=\count84
+\c@paragraph=\count85
+\c@subparagraph=\count86
+\@abstractbox=\box41
+\c@figure=\count87
+\c@table=\count88
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\@lnumwidth=\dimen120
+\bibindent=\dimen121
+LaTeX Info: Redefining \TeX on input line 1693.
+LaTeX Info: Redefining \LaTeX on input line 1719.
+LaTeX Info: Redefining \LaTeXe on input line 1744.
+\heisei=\count89
+)
+(/opt/local/share/texmf-dist/tex/latex/mdwtools/syntax.sty
+Package: syntax 1996/05/17 1.07 Syntax typesetting (MDW)
+\grammarparsep=\skip43
+\grammarindent=\dimen122
+\sdstartspace=\skip44
+\sdendspace=\skip45
+\sdmidskip=\skip46
+\sdtokskip=\skip47
+\sdfinalskip=\skip48
+\sdrulewidth=\dimen123
+\sdcirclediam=\dimen124
+\sdindent=\dimen125
+)
+(/opt/local/share/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2002/07/08 v3.2 Page Geometry
+
+(/opt/local/share/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+\Gm@cnth=\count90
+\Gm@cntv=\count91
+\c@Gm@tempcnt=\count92
+\Gm@bindingoffset=\dimen126
+\Gm@wd@mp=\dimen127
+\Gm@odd@mp=\dimen128
+\Gm@even@mp=\dimen129
+\Gm@dimlist=\toks16
+
+(/opt/local/share/texmf-dist/tex/latex/geometry/geometry.cfg))
+(/opt/local/share/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count93
+\lst@gtempboxa=\box42
+\lst@token=\toks17
+\lst@length=\count94
+\lst@currlwidth=\dimen130
+\lst@column=\count95
+\lst@pos=\count96
+\lst@lostspace=\dimen131
+\lst@width=\dimen132
+\lst@newlines=\count97
+\lst@lineno=\count98
+\c@lstlisting=\count99
+\lst@maxwidth=\dimen133
+
+(/opt/local/share/texmf-dist/tex/latex/listings/lstpatch.sty
+File: lstpatch.sty 2004/10/17 1.3b (Carsten Heinz)
+)
+(/opt/local/share/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2004/09/07 1.3 (Carsten Heinz)
+\c@lstnumber=\count100
+\lst@skipnumbers=\count101
+\lst@framebox=\box43
+)
+(/opt/local/share/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2004/09/05 1.3 listings configuration
+))
+Package: listings 2004/10/17 1.3b (Carsten Heinz)
+
+(/opt/local/share/texmf/tex/latex/graphics/dvipdfmx-contrib-latex/color.sty
+Package: color 1999/02/16 v1.0i Standard LaTeX Color (DPC)
+
+(/opt/local/share/texmf-dist/tex/latex/graphics/color.cfg
+File: color.cfg 2005/02/03 v1.3 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: dvips.def on input line 126.
+
+(/opt/local/share/texmf-dist/tex/latex/graphics/dvips.def
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+)
+(/opt/local/share/texmf-dist/tex/latex/graphics/dvipsnam.def
+File: dvipsnam.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
+(/opt/local/share/texmf-dist/tex/latex/metre/metre.sty
+Package: metre 2001/12/05 v. 1.0 A package for classicists
+
+(/opt/local/share/texmf-dist/tex/latex/relsize/relsize.sty
+Package: relsize 2003/07/04 ver 3.1
+
+
+Package relsize Warning: Failed to get list of font sizes.
+(relsize)                Falling back to old definition. on input line 81.
+
+)
+\M@ibycus=\count102
+\M@metra=\count103
+\M@metra@font=\count104
+\M@box@m=\box44
+\M@box@b=\box45
+\M@box@tsmb=\box46
+\M@box@tsbm=\box47
+\M@box@tsmm=\box48
+\M@box@ps=\box49
+\M@box@a=\box50
+\M@box@o=\box51
+\M@box@k=\box52
+\M@box@K=\box53
+\M@box@p=\box54
+\M@box@A=\box55
+\M@box@G=\box56
+\M@dim@m=\dimen134
+\M@dim@b=\dimen135
+\M@dim@p=\dimen136
+\M@dim@s=\dimen137
+\M@dim@bsink=\dimen138
+\M@dim@sunk=\dimen139
+\M@metra@ex=\dimen140
+\M@text@ex=\dimen141
+\M@dim@c@ext=\dimen142
+\M@dim@c@int=\dimen143
+\M@dim@c@Ext=\dimen144
+\M@linea@indent=\dimen145
+\M@linea@height=\dimen146
+\M@linea@length=\dimen147
+) (/opt/local/share/texmf-dist/tex/latex/psnfss/courier.sty
+Package: courier 2004/09/15 PSNFSS-v9.2 (WaS) 
+) (./ebnf.aux)
+\openout1 = `ebnf.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+-------------------- Geometry parameters
+paper: a4paper
+landscape: --
+twocolumn: --
+twoside: --
+asymmetric: --
+h-parts: 56.9055pt, 483.69687pt, 56.9055pt
+v-parts: 56.9055pt, 702.78308pt, 85.35826pt
+hmarginratio: --
+vmarginratio: --
+lines: --
+heightrounded: --
+bindingoffset: 0.0pt
+truedimen: --
+includehead: --
+includefoot: --
+includemp: --
+driver: 
+-------------------- Page layout dimensions and switches
+\paperwidth  654.26651pt
+\paperheight 925.30975pt
+\textwidth  483.69687pt
+\textheight 702.78308pt
+\oddsidemargin  -15.36449pt
+\evensidemargin -15.36449pt
+\topmargin  -51.35335pt
+\headheight 20.0pt
+\headsep    15.98886pt
+\footskip   25.98886pt
+\marginparwidth 18.49374pt
+\marginparsep   18.49374pt
+\columnsep  18.49374pt
+\skip\footins  16.0pt plus 5.0pt minus 2.0pt
+\hoffset 6.27573pt
+\voffset 6.27573pt
+\mag 1095
+
+(1in=72.27pt, 1cm=28.45pt)
+-----------------------
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 10.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 10.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 6.72699pt on input line 10.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 4.805pt on input line 10.
+LaTeX Font Info:    Font shape `JT1/mc/m/it' in size <10> not available
+(Font)              Font shape `JT1/mc/m/n' tried instead on input line 10.
+LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 10.
+LaTeX Font Info:    Font shape `JY1/mc/m/it' in size <10> not available
+(Font)              Font shape `JY1/mc/m/n' tried instead on input line 10.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 10.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 15.
+
+(/opt/local/share/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 15.
+LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 19.
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 19.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 19.
+
+(/opt/local/share/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+LaTeX Font Info:    Try loading font information for OMS+pcr on input line 19.
+
+(/opt/local/share/texmf-dist/tex/latex/psnfss/omspcr.fd
+File: omspcr.fd 
+)
+LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 19.
+ [1
+
+]
+LaTeX Font Info:    Try loading font information for OML+pcr on input line 118.
+
+
+(/opt/local/share/texmf-dist/tex/latex/psnfss/omlpcr.fd
+File: omlpcr.fd 
+)
+LaTeX Font Info:    Font shape `OML/pcr/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 118.
+ [2] (./ebnf.aux) ) 
+Here is how much of TeX's memory you used:
+ 2960 strings out of 94682
+ 38161 string characters out of 1177960
+ 107431 words of memory out of 1500000
+ 6258 multiletter control sequences out of 10000+50000
+ 9399 words of font info for 42 fonts, out of 1200000 for 2000
+ 571 hyphenation exceptions out of 8191
+ 26i,5n,42p,188b,370s stack positions out of 5000i,500n,6000p,200000b,5000s
+
+Output written on ebnf.dvi (2 pages, 9080 bytes).

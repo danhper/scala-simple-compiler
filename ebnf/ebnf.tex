@@ -1,0 +1,121 @@
+\documentclass[fleqn,a4paper,11pt]{jsarticle}
+\usepackage{syntax}
+\usepackage[margin=2cm, bottom=3cm]{geometry}
+\usepackage{listings}
+\usepackage{color,metre}
+\usepackage{courier}
+\setlength{\grammarindent}{30mm}
+\begin{document}
+\begin{grammar}
+<single_input> ::= <single_stmt>
+
+<file_input> ::= <stmt_list>
+
+<stmt_list> ::= <single_stmt> <stmt_list>
+\alt <single_stmt>
+
+<single_stmt> ::= <stmt> <new_line>
+
+<new_line> ::= \lit{\textbackslash n} \#Unix based
+\alt \lit{\textbackslash r \textbackslash n} \#Windows
+
+<single_stmt> ::= <func_def>
+\alt <print_stmt>
+\alt <if_stmt>
+\alt <for_stmt>
+\alt <while_stmt>
+\alt <import_stmt>
+\alt <assign_stmt>
+\alt <expr_stmt>
+\alt <empty_stmt>
+
+<print_stmt> ::= \lit{print} \lit{(} <expr> \lit{)}
+
+<if_stmt> ::= \lit{if} <test> \lit{:} <stmt_list> <elif> <else>
+
+<elif> ::= \lit{elif} <test> \lit{:} <stmt_list> <elif>
+\alt \#nothing
+
+<else> ::= \lit{else} \lit{:} <stmt_list>
+\alt \#nothing
+
+<for_stmt> ::= \lit{for} <exp> \lit{in} <exp> \lit{to} <exp> \lit{:} <stmt_list>
+
+<while_stmt> ::= \lit{while} <test> \lit{:} <stmt_list>
+
+<import_stmt> ::= \lit{import} <string>
+
+<assign_stmt> ::= <var> \lit{++}
+\alt <var> \lit{--} 
+\alt <var> <assign_op> <exp>
+
+<assign_op> ::= \lit{=} | \lit{+=} | \lit{-=} | \lit{*=} | \lit{/=} | \lit{\%=} | \lit{\^{}=}
+
+<expr_stmt> ::= <exp>
+
+<empty_stmt> ::= \#nothing
+
+<exp> ::= <exp> \lit{+} <term>
+\alt <exp> \lit{-} <term>
+\alt <term>
+
+<term> ::= <term> \lit{*} <pow>
+\alt <term> \lit{/} <pow>
+\alt <term> \lit{\%} <pow>
+\alt <pow>
+
+<pow> ::= <factor> \lit{\^{}} <pow>
+\alt <factor>
+
+<factor> ::= <int>
+\alt <double>
+\alt <string>
+\alt <var>
+\alt <func_call>
+\alt \lit{\$} \#previous input
+\alt \lit{(} <exp> \lit{)}
+\alt \lit{+} <factor>
+\alt \lit{-} <factor>
+
+<int> ::= <number>
+
+<double> ::= <number> \lit{.} <number>
+
+<number> ::= <digit> <number>
+\alt <digit>
+
+<digit> ::= \lit{0} | \lit{1} | \lit{2} | \lit{3} | \lit{4} | \lit{5} | \lit{6} | \lit{7} | \lit{8} | \lit{9}
+
+<string> ::= <char> <string>
+\alt <char> \#UTF-8 character
+
+<var> ::= <alpha_num> <var>
+\alt <alpha_num>
+
+<alpha_num> ::= <digit>
+\alt <letter> \# a to z, A to Z
+\alt \lit{_}
+
+<func_call> ::= <var> \lit{(} <param_list> \lit{)}
+\alt <var> \lit{()}
+
+<param_list> ::= <var>\lit{,} <param_list> 
+\alt <var>
+
+<test> ::= <or_test>
+
+<or_test> ::= <and_test> \lit{\textbar\textbar} <or_test>
+\alt <and_test>
+
+<and_test> ::= <not_test> \lit{\&\&} <and_test>
+\alt <not_test>
+
+<not_test> ::= \lit{!} <comparison>
+\alt <comparison>
+
+<comparison> ::= <exp> <comp_op> <exp> 
+
+<comp_op> ::= \lit{==} | \lit{!=} | \lit{\textgreater} | \lit{\textless} | \lit{\textgreater =} | \lit{\textless =}
+\end{grammar}
+\end{document}
+

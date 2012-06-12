@@ -1,3 +1,6 @@
+pi = 3.141592654
+e = 2.71828
+
 fun fact(n):
     res = 1
     for i in 2 to n:
@@ -28,6 +31,7 @@ fun to_double(x):
 end
 
 fun sin(x):
+    x %= 2 * pi
     res = 0
     for n in 0 to 30:
         sign = get_sign(n)
@@ -39,6 +43,7 @@ fun sin(x):
 end
 
 fun cos(x):
+    x %= 2 * pi
     res = 0
     for n in 0 to 30:
         sign = get_sign(n)
@@ -96,4 +101,40 @@ end
 
 fun sqrt(x):
     x ^ 0.5
+end
+
+fun max(a, b):
+    if a > b:
+       a
+    else:
+       b
+    end
+end
+
+fun min(a, b):
+    if a < b:
+       a
+    else:
+       b
+    end
+end
+
+fun deriv(f, x):
+    precision = 0.00000001
+    h = precision
+    (f(x + h) - f(x)) / h
+end
+
+fun integrate(f, a, b):
+    trapeze_num = 100
+    start = min(a, b)
+    stop = max(a, b)
+    step = (stop - start) / to_double(trapeze_num)
+    res = 0
+    x = start
+    for i in 2 to trapeze_num:
+        x += step
+        res += f(x) * step
+    end
+    res + step * (f(start) + f(stop)) / 2.0
 end
